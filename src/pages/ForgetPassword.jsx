@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 export const ForgetPassword = () => {
   const [email, setEmail] = useState();
   const OnSiginChange = (event) => {
     setEmail(event.target.value)
   };
+  async function onsubmit(e){
+    e.preventDefault();
+    try {
+      const auth = getAuth();
+      await sendPasswordResetEmail(auth,email);
+      toast.success("Email Sent!")
+    } catch (error) {
+      toast.error("Could not send reset email!")
+    }
+  }
   return (
     <section className="min-h-screen flex flex-col justify-center sm:px-6 lg:px-8 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-md ">
@@ -16,7 +28,7 @@ export const ForgetPassword = () => {
           <div className="flex items-center justify-center mb-6">
             <img className="w-20 h-20" src={logo} alt="logo" />
           </div>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={onsubmit}>
             <div>
               <label
                 htmlFor="email"

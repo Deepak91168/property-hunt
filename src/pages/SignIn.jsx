@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import logo from "../assets/images/logo.png";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { OAuth } from "../components/OAuth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { toast } from "react-toastify";
 export const SignIn = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [signinData, setsigninData] = useState({
     email: "",
@@ -16,6 +22,22 @@ export const SignIn = () => {
       [event.target.id]: event.target.value,
     }));
   };
+  async function onsubmit(event){
+    event.preventDefault();
+    try {
+      const auth = getAuth();
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if(userCredentials.user){
+        navigate('/')
+      }
+    } catch (error) {
+      toast.error("Wrong Password!")
+    }
+  }
   return (
     <section className="min-h-screen flex flex-col justify-center sm:px-6 lg:px-8 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-md ">
@@ -26,7 +48,7 @@ export const SignIn = () => {
           <div className="flex items-center justify-center mb-6">
             <img className="w-20 h-20" src={logo} alt="logo" />
           </div>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={onsubmit}>
             <div>
               <label
                 htmlFor="email"
