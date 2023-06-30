@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router";
 import logo from "../assets/images/logo.png";
-// text-[#c40c1c]
+// #c40c1c 
 export const NavBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
