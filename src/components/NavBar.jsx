@@ -1,10 +1,34 @@
 import { useLocation, useNavigate } from "react-router";
 import logo from "../assets/images/logo.png";
-// #c40c1c 
+import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+// #c40c1c
 export const NavBar = () => {
+  //true = Sign in
+  const [pageState, setPageState] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const pathUrl = location.pathname;
+  const auth = getAuth();
+  const svg = (
+    <svg
+      className="h-6 w-6"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="#c40c1c"
+    >
+      <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+    </svg>
+  );
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setPageState(false);
+      } else {
+        setPageState(true);
+      }
+    });
+  }, [auth]);
   const checkPath = (currentRoute) => {
     return currentRoute === pathUrl;
   };
@@ -40,11 +64,12 @@ export const NavBar = () => {
             </li>
             <li
               className={` cursor-pointer  ${
-                checkPath("/singin") && " text-[#c40c1c] font-bold "
+                (checkPath("/singin") || checkPath("/profile")) &&
+                "text-[#c40c1c] font-bold "
               }`}
-              onClick={() => navigate("/singin")}
+              onClick={() => navigate("/profile")}
             >
-              Sign in
+              {pageState ? "Sign in" : svg}
             </li>
           </ul>
         </div>
