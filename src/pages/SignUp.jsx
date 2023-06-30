@@ -1,22 +1,55 @@
 import React, { useState } from "react";
 import logo from "../assets/images/logo.png";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { OAuth } from "../components/OAuth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { db } from "../firebase";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
+import { toast } from "react-toastify";
+
 export const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [signinData, setsigninData] = useState({
-    name:"",
+    name: "",
     email: "",
     password: "",
   });
-  const {name, email, password } = signinData;
+  const navigate = useNavigate();
+  const { name, email, password } = signinData;
   const OnSiginChange = (event) => {
     setsigninData((prev) => ({
       ...prev,
       [event.target.id]: event.target.value,
     }));
   };
+  async function onsubmit(event) {
+    event.preventDefault();
+    try {
+      const auth = getAuth();
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      });
+      const user = userCredentials.user;
+      const formDatacopy = { ...signinData };
+      delete signinData.password;
+      formDatacopy.timestamp = serverTimestamp();
+      await setDoc(doc(db, "users", user.uid), formDatacopy);
+      toast.success("Account created successfully!")
+      navigate("/");
+    } catch (error) {
+      toast.error("Something went Wrong!")
+    }
+  }
   return (
     <section className="min-h-screen flex flex-col justify-center sm:px-6 lg:px-8 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-md ">
@@ -27,8 +60,8 @@ export const SignUp = () => {
           <div className="flex items-center justify-center mb-6">
             <img className="w-20 h-20" src={logo} alt="logo" />
           </div>
-          <form className="space-y-6">
-          <div>
+          <form className="space-y-6" onSubmit={onsubmit}>
+            <div>
               <label
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700"
@@ -38,9 +71,9 @@ export const SignUp = () => {
               <div className="mt-1">
                 <input
                   id="name"
+                  required
                   name="name"
                   type="name"
-                  required
                   value={name}
                   onChange={OnSiginChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
@@ -59,8 +92,8 @@ export const SignUp = () => {
                   id="email"
                   name="email"
                   type="email"
-                  autoComplete="email"
                   required
+                  autoComplete="email"
                   value={email}
                   onChange={OnSiginChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
@@ -118,7 +151,7 @@ export const SignUp = () => {
               >
                 Sign Up
               </button>
-              <OAuth/>
+              <OAuth />
             </div>
           </form>
         </div>

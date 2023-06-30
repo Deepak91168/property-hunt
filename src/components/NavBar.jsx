@@ -15,7 +15,7 @@ export const NavBar = () => {
           className="flex justify-center items-center cursor-pointer"
           onClick={() => navigate("/")}
         >
-          <img src={logo} className="h-9 cursor-pointer" alt="logo" />
+          <img src={logo} className="h-8 cursor-pointer" alt="logo" />
           <h3 className="ml-4 font-bold text-[#c40c1c] text-lg">
             Property Hunt
           </h3>
