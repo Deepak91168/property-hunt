@@ -9,6 +9,8 @@ import {
 } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { v4 as uuid } from "uuid";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
 export const CreateListing = () => {
   const auth = getAuth();
   const hollowbtn =
@@ -101,8 +103,6 @@ export const CreateListing = () => {
         uploadTask.on(
           "state_changed",
           (snapshot) => {
-            // Observe state change events such as progress, pause, and resume
-            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             console.log("Upload is " + progress + "% done");
             switch (snapshot.state) {
@@ -119,10 +119,7 @@ export const CreateListing = () => {
             reject(error);
           },
           () => {
-            // Handle successful uploads on complete
-            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              console.log(downloadURL);
               resolve(downloadURL);
             });
           }
@@ -136,7 +133,16 @@ export const CreateListing = () => {
       toast.error("Unable to upload image!");
       return;
     });
-    console.log(imgUrls);
+    const formCopy = {
+      ...formdata,
+      imgUrls,
+      geolocation,
+      timestamp: serverTimestamp()
+    };
+    delete formCopy.images;
+    !formCopy.offer && delete formCopy.priceDiscounted
+    const docRef = await addDoc(collection(db,"listings"),formCopy);
+    toast.success("Property added successfully!")
     setLoader(false)
   }
 
