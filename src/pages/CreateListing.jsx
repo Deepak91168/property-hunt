@@ -1,7 +1,16 @@
 import { useState } from "react";
-
+import { Loader } from "../components/Loader";
+import { toast } from "react-toastify";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { getAuth } from "firebase/auth";
+import { v4 as uuid } from "uuid";
 export const CreateListing = () => {
-  const [geolocationEnable, setgeolocationEnabled] = useState(true);
+  const auth = getAuth();
   const hollowbtn =
     "w-full flex justify-center items-center py-2 px-4 border border-red-500 rounded-md shadow-sm text-sm font-medium text-red-500 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500";
   const fullbtn =
@@ -20,6 +29,7 @@ export const CreateListing = () => {
     priceDiscounted: null,
     latitude: null,
     longitude: null,
+    images: {},
   });
   const {
     name,
@@ -35,10 +45,11 @@ export const CreateListing = () => {
     priceDiscounted,
     latitude,
     longitude,
+    images,
   } = formdata;
-
+  const [geolocationEnable, setgeolocationEnabled] = useState(false);
+  const [loader, setLoader] = useState(false);
   const onchange = (e) => {
-    console.log("Change");
     let bool = null;
     if (e.target.value === "true") {
       bool = true;
@@ -54,17 +65,82 @@ export const CreateListing = () => {
       }));
     }
     if (!e.target.files) {
-      console.log(e.target.value);
       setFormData((prev) => ({
         ...prev,
         [e.target.id]: bool ?? e.target.value,
       }));
     }
   };
-  function onsubmit(e) {
-    console.log("On Submit");
+  async function onsubmit(e) {
     e.preventDefault();
+    setLoader(true);
+    if (priceDiscounted != null && priceDiscounted >= priceRegular) {
+      setLoader(false);
+      toast.error("Discounted Price should be less than Regular Price");
+      return;
+    }
+    if (images.length > 6) {
+      setLoader(false);
+      toast.error("Maximum 6 images are allowed");
+    }
+    let geolocation = {};
+    let location;
+    if (geolocationEnable) {
+      // Fetch form google map api
+    }
+    if (!geolocation) {
+      geolocation.latitude = latitude;
+      geolocation.longitude = longitude;
+    }
+    async function storeImage(image) {
+      return new Promise((resolve, reject) => {
+        const storage = getStorage();
+        const filename = `${auth.currentUser.uid}-${image.name}-${uuid()}`;
+        const storageRef = ref(storage, filename);
+        const uploadTask = uploadBytesResumable(storageRef, image);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+            switch (snapshot.state) {
+              case "paused":
+                console.log("Upload is paused");
+                break;
+              case "running":
+                console.log("Upload is running");
+                break;
+            }
+          },
+          (error) => {
+            console.log(error);
+            reject(error);
+          },
+          () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              console.log(downloadURL);
+              resolve(downloadURL);
+            });
+          }
+        );
+      });
+    }
+    const imgUrls = await Promise.all(
+      [...images].map((image) => storeImage(image))
+    ).catch((error) => {
+      setLoader(false);
+      toast.error("Unable to upload image!");
+      return;
+    });
+    console.log(imgUrls);
+    setLoader(false)
   }
+
+  if (loader) return <Loader />;
   return (
     <section className="mt-6 flex max-h-full flex-col justify-center sm:px-6 lg:px-4 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-xl lg:max-w-2xl">
@@ -197,8 +273,8 @@ export const CreateListing = () => {
               <input
                 id="latitude"
                 name="latitude"
-                max="-90"
-                min="90"
+                max="90"
+                min="-90"
                 type="number"
                 value={latitude}
                 placeholder="Latitude"
@@ -211,8 +287,8 @@ export const CreateListing = () => {
                 name="longitude"
                 placeholder="longitude"
                 type="number"
-                max="-1800"
-                min="180"
+                max="180"
+                min="-180"
                 value={longitude}
                 onChange={onchange}
                 className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
