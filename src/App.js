@@ -5,6 +5,7 @@ import { Offers } from "./pages/Offers";
 import { Profile } from "./pages/Profile";
 import { SignIn } from "./pages/SignIn";
 import { SignUp } from "./pages/SignUp";
+import { CreateListing } from "./pages/CreateListing";
 import { NavBar } from "./components/NavBar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,10 +20,11 @@ function App() {
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/singin" element={<SignIn />} />
           <Route path="/singup" element={<SignUp />} />
-          <Route path="/profile" element={<PrivateRoute/>}>
+          <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/offers" element={<Offers />} />
+          <Route path="/createlisting" element={<CreateListing />} />
         </Routes>
       </Router>
       <ToastContainer

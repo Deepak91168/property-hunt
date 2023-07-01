@@ -85,7 +85,7 @@ export const Profile = () => {
                 disabled={!edit}
                 value={name}
                 onChange={onInputChange}
-                className={`text-3xl p-2 ${
+                className={`text-3xl p-2 max-w-full ${
                   edit &&
                   "bg-red-100 focus:bg-red-200 focus:border-red-400 rounded-md"
                 } text-center font-medium text-gray-700 focus:border-[#c40c1c] focus:outline-none focus:ring-2 focus:ring-[#c40c1c]`}
@@ -107,10 +107,18 @@ export const Profile = () => {
           <div className="max-w-md m-auto space-x-8 flex justify-center items-center md:justify-center ">
             <button
               type="text"
-              onClick={onEditprofile}
               className=" w-full flex justify-center items-center py-2 px-4 border border-red-500 rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
             >
-              {edit ? "Apply Changes" : "Edit"}
+              Sell or Rent Property
+            </button>
+          </div>
+          <div className="mt-5 max-w-md m-auto space-x-8 flex justify-center items-center md:justify-center ">
+            <button
+              type="text"
+              onClick={onEditprofile}
+              className=" w-full flex justify-center items-center py-2 px-4 border border-red-500 rounded-md shadow-sm text-sm font-medium text-red-500 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            >
+              {edit ? "Apply Changes" : "Edit Profile"}
             </button>
             <button
               type="submit"
