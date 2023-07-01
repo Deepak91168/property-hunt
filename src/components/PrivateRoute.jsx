@@ -1,9 +1,10 @@
 import { Outlet, Navigate } from "react-router";
 import {useAuthStatus} from "../hooks/useAuthStatus";
+import { Loader } from "./Loader";
 export default function PrivateRoute(){
   const {loggedin, checkingstatus} = useAuthStatus();
   if (checkingstatus) {
-    return <h3>Loding...</h3>;
+    return <Loader/>
   }
   return loggedin ? <Outlet /> : <Navigate to="/singin" />;
 };
