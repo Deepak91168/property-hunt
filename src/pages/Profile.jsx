@@ -51,6 +51,9 @@ export const Profile = () => {
       [e.target.id]: e.target.value,
     }));
   };
+  const redirecttolisting = () => {
+    navigate('/createlisting')
+  }
   const svg = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -107,6 +110,7 @@ export const Profile = () => {
           <div className="max-w-md m-auto space-x-8 flex justify-center items-center md:justify-center ">
             <button
               type="text"
+              onClick={redirecttolisting}
               className=" w-full flex justify-center items-center py-2 px-4 border border-red-500 rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
             >
               Sell or Rent Property
