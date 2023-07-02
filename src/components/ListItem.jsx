@@ -5,34 +5,30 @@ import { FaBed, FaBath } from "react-icons/fa";
 import { IoMdTrash, IoMdCreate } from "react-icons/io";
 import { BiSolidOffer } from "react-icons/bi";
 export const ListItem = ({ listing, id }) => {
-  console.log(listing.priceRegular + " " + listing.priceDiscounted);
-  let discounted = true;
   return (
     <Link
       to={`/category/${listing.type}/${id}`}
       className="border-2 border-red-500/300 rounded-xl shadow-md "
     >
       <div className="flex justify-center">
-        <img className="h-48" src={listing.imgUrls[0]} alt="" />
+        <img className="h-48 pb-2" src={listing.imgUrls[0]} alt="" />
       </div>
       <hr className="mx-2 bg-[#c40c1c] h-[2px]"></hr>
       <div className="p-2">
-        <div className="pt-2 border-2">
+        <div className="pt-2">
           <span className="font-bold">{listing.name}</span>
           <div className="flex justify-start mb-2 pr-2">
             <p className="text-sm">
-              {" "}
-              {listing.address} Hello sakjdhaskh kasdhkjashdk askdjhkas hdkjash
-              kjdhas kjd hkasj hd{" "}
+              {listing.address} 
             </p>
           </div>
         </div>
         <div className="text-2xl flex font-semibold text-[#c40c1c]">
           {"₹" + +listing.regularPrice}
-          <BiSolidOffer className={!discounted ? "text-[20px]" : "hidden"} />
+          <BiSolidOffer className="hidden" />
         </div>
 
-        <div className="border-2 flex flex-col mt-2">
+        <div className="flex flex-col mt-2">
           <p className="text-sm ">Rooms</p>
           <div className="flex justify-between items-baseline">
             <div className="flex w-[50%]">
