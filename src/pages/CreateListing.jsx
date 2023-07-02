@@ -11,7 +11,11 @@ import { getAuth } from "firebase/auth";
 import { v4 as uuid } from "uuid";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import "../styles/removeArrows.css";
+import { useNavigate } from "react-router";
+// import { ProgressBar } from "../components/ProgressBar";
 export const CreateListing = () => {
+  const navigate = useNavigate();
   const auth = getAuth();
   const hollowbtn =
     "w-full flex justify-center items-center py-2 px-4 border border-red-500 rounded-md shadow-sm text-sm font-medium text-red-500 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500";
@@ -88,7 +92,7 @@ export const CreateListing = () => {
     let geolocation = {};
     let location;
     if (geolocationEnable) {
-      // Fetch form google map api
+      // Fetch from google map api
     }
     if (!geolocation) {
       geolocation.latitude = latitude;
@@ -103,7 +107,10 @@ export const CreateListing = () => {
         uploadTask.on(
           "state_changed",
           (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            // <ProgressBar progress={progress}/>
             console.log("Upload is " + progress + "% done");
             switch (snapshot.state) {
               case "paused":
@@ -137,13 +144,17 @@ export const CreateListing = () => {
       ...formdata,
       imgUrls,
       geolocation,
-      timestamp: serverTimestamp()
+      timestamp: serverTimestamp(),
     };
     delete formCopy.images;
-    !formCopy.offer && delete formCopy.priceDiscounted
-    const docRef = await addDoc(collection(db,"listings"),formCopy);
-    toast.success("Property added successfully!")
-    setLoader(false)
+    !formCopy.offer && delete formCopy.priceDiscounted;
+    delete formCopy.latitude;
+    delete formCopy.longitude;
+    const docRef = await addDoc(collection(db, "listings"), formCopy);
+    navigate(`/category/${formCopy.type}/${docRef.id}`);
+    toast.success("Property added successfully!");
+
+    setLoader(false);
   }
 
   if (loader) return <Loader />;
@@ -242,7 +253,7 @@ export const CreateListing = () => {
                   value={bed}
                   min={1}
                   onChange={onchange}
-                  className="mr-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                  className="no-number-arrows mr-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                 />
                 <input
                   id="bath"
@@ -252,7 +263,7 @@ export const CreateListing = () => {
                   value={bath}
                   type="number"
                   onChange={onchange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                  className="no-number-arrows appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                 />
               </div>
             </div>
@@ -285,7 +296,7 @@ export const CreateListing = () => {
                 value={latitude}
                 placeholder="Latitude"
                 onChange={onchange}
-                className="mr-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                className="no-number-arrows mr-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
               />
 
               <input
@@ -297,7 +308,7 @@ export const CreateListing = () => {
                 min="-180"
                 value={longitude}
                 onChange={onchange}
-                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                className="no-number-arrows appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
               />
             </div>
             <div>
@@ -357,7 +368,7 @@ export const CreateListing = () => {
                     value={priceRegular}
                     placeholder="Regular"
                     onChange={onchange}
-                    className="mr-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                    className="no-number-arrows mr-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                   />
                   {offer && (
                     <input
@@ -367,7 +378,7 @@ export const CreateListing = () => {
                       type="number"
                       value={priceDiscounted}
                       onChange={onchange}
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                      className="no-number-arrows appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                     />
                   )}
                 </div>
