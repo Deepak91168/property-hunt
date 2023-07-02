@@ -1,5 +1,5 @@
 import { getAuth, updateProfile } from "firebase/auth";
-import { doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
@@ -95,6 +95,17 @@ export const Profile = () => {
     }
     fetachuserListings();
   }, [auth.currentUser.uid]);
+  async function onDelete(id) {
+    if (window.confirm("Are you Sure?")) {
+      await deleteDoc(doc(db, "listings", id));
+      const updatedList = listings.filter((list) => list.id !== id);
+      setListings(updatedList)
+      toast.success("Successfully Deleted!")
+    }
+  }
+  function onEdit(id) {
+    navigate(`/edit-listing/${id}`);
+  }
   return (
     <section className="px-4 py-6 max-w-6xl mx-auto ">
       <div className="p-8 bg-white shadow-xl mt-24 border-[0.5px] border-red-500/30">
@@ -191,7 +202,13 @@ export const Profile = () => {
               <div className="flex justify-center items-center">
                 <div className="p-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 w-[80%] sm:w-1/2 md:w-[60%] lg:w-[100%]">
                   {listings.map((list) => (
-                    <ListItem key={list.id} id={list.id} listing={list.data} />
+                    <ListItem
+                      key={list.id}
+                      id={list.id}
+                      listing={list.data}
+                      onDelete={() => onDelete(list.id)}
+                      onEdit={() => onEdit(list.id)}
+                    />
                   ))}
                 </div>
               </div>

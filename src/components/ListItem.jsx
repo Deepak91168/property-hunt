@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import { FaBed, FaBath } from "react-icons/fa";
 import { IoMdTrash, IoMdCreate } from "react-icons/io";
 import { BiSolidOffer } from "react-icons/bi";
-export const ListItem = ({ listing, id }) => {
+// to={`/category/${listing.type}/${id}`}
+export const ListItem = ({ listing, id, onDelete, onEdit }) => {
   return (
-    <Link
-      to={`/category/${listing.type}/${id}`}
+    <div
+      
       className="border-2 border-red-500/300 rounded-xl shadow-md "
     >
       <div className="flex justify-center">
@@ -18,9 +19,7 @@ export const ListItem = ({ listing, id }) => {
         <div className="pt-2">
           <span className="font-bold">{listing.name}</span>
           <div className="flex justify-start mb-2 pr-2">
-            <p className="text-sm">
-              {listing.address} 
-            </p>
+            <p className="text-sm">{listing.address}</p>
           </div>
         </div>
         <div className="text-2xl flex font-semibold text-[#c40c1c]">
@@ -43,16 +42,29 @@ export const ListItem = ({ listing, id }) => {
             </div>
 
             <div className="flex justify-end items-end w-[50%]">
-              <button>
-                <IoMdCreate className=" text-xl hover:text-[#c40c1c]" />
-              </button>
-              <button>
-                <IoMdTrash className="text-xl hover:text-[#c40c1c]" />
-              </button>
+              {onEdit && (
+                <button>
+                  <IoMdCreate
+                    type="button"
+                    onClick={() => onEdit(listing.id)}
+                    className=" text-xl hover:text-[#c40c1c]"
+                  />
+                </button>
+              )}
+
+              {onDelete && (
+                <button>
+                  <IoMdTrash
+                    type="button"
+                    onClick={() => onDelete(listing.id)}
+                    className="text-xl hover:text-[#c40c1c]"
+                  />
+                </button>
+              )}
             </div>
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
