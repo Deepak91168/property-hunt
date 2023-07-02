@@ -95,16 +95,16 @@ export const Profile = () => {
     }
     fetachuserListings();
   }, [auth.currentUser.uid]);
-  async function onDelete(id) {
+  async function onDelete(listID) {
     if (window.confirm("Are you Sure?")) {
-      await deleteDoc(doc(db, "listings", id));
-      const updatedList = listings.filter((list) => list.id !== id);
+      await deleteDoc(doc(db, "listings", listID));
+      const updatedList = listings.filter((list) => list.id !== listID);
       setListings(updatedList)
       toast.success("Successfully Deleted!")
     }
   }
-  function onEdit(id) {
-    navigate(`/edit-listing/${id}`);
+  function onEdit(listID) {
+    navigate(`/edit-listing/${listID}`);
   }
   return (
     <section className="px-4 py-6 max-w-6xl mx-auto ">
