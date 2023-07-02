@@ -31,8 +31,8 @@ export const CreateListing = () => {
     bath: null,
     address: "",
     description: "",
-    priceRegular: null,
-    priceDiscounted: null,
+    priceRegular: 0,
+    priceDiscounted: 0,
     latitude: null,
     longitude: null,
     images: {},
@@ -71,6 +71,7 @@ export const CreateListing = () => {
       }));
     }
     if (!e.target.files) {
+      console.log(e.target.value);
       setFormData((prev) => ({
         ...prev,
         [e.target.id]: bool ?? e.target.value,
@@ -90,7 +91,6 @@ export const CreateListing = () => {
       toast.error("Maximum 6 images are allowed");
     }
     let geolocation = {};
-    let location;
     if (geolocationEnable) {
       // Fetch from google map api
     }
@@ -149,12 +149,13 @@ export const CreateListing = () => {
       
     };
     delete formCopy.images;
-    !formCopy.offer && delete formCopy.priceDiscounted;
+    !formdata.offer && delete formCopy.priceDiscounted;
     delete formCopy.latitude;
     delete formCopy.longitude;
+    console.log(formCopy);
     const docRef = await addDoc(collection(db, "listings"), formCopy);
     navigate(`/category/${formCopy.type}/${docRef.id}`);
-    toast.success("Property added successfully!");
+    toast.success("Property Listed successfully!");
 
     setLoader(false);
   }

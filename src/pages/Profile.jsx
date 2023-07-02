@@ -91,7 +91,6 @@ export const Profile = () => {
         });
       });
       setListings(listings);
-      console.log(listings);
       setLoading(false);
     }
     fetachuserListings();
@@ -180,19 +179,21 @@ export const Profile = () => {
         </div>
         <div
           id="listing"
-          className={showlistings ? "px-4 py-6 max-w-6xl mx-auto"  : "hidden"}
+          className={showlistings ? "px-4 py-6 max-w-6xl mx-auto" : "hidden"}
         >
           {!loading && listings.length > 0 && (
             <div className="">
               <div>
-              <h2 className="text-center text-2xl font-bold text-[#c40c1c] mb-4">
-                My Listings
-              </h2>
+                <h2 className="text-center text-2xl font-bold text-[#c40c1c] mb-4">
+                  My Listings
+                </h2>
               </div>
-              <div className="flex justify-between">
-              {listings.map((list) => (
-                <ListItem key={list.id} id={list.id} listing={list.data} />
-              ))}
+              <div className="flex justify-center items-center">
+                <div className="p-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 w-[80%] sm:w-1/2 md:w-[60%] lg:w-[100%]">
+                  {listings.map((list) => (
+                    <ListItem key={list.id} id={list.id} listing={list.data} />
+                  ))}
+                </div>
               </div>
             </div>
           )}
