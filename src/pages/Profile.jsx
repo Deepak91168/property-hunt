@@ -1,19 +1,24 @@
 import { getAuth, updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { db } from "../firebase";
-
+import { query, where, collection, getDocs, orderBy } from "firebase/firestore";
+import { ListItem } from "../components/ListItem";
+import { Link } from "react-router-dom";
 export const Profile = () => {
   const auth = getAuth();
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
+  const [listings, setListings] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: auth.currentUser.displayName,
     email: auth.currentUser.email,
   });
   const { name, email } = formData;
+  const [showlistings, setShowListings] = useState(false);
   const onSignout = (e) => {
     e.preventDefault();
     auth.signOut();
@@ -52,8 +57,8 @@ export const Profile = () => {
     }));
   };
   const redirecttolisting = () => {
-    navigate('/createlisting')
-  }
+    navigate("/createlisting");
+  };
   const svg = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -68,6 +73,29 @@ export const Profile = () => {
       />
     </svg>
   );
+
+  useEffect(() => {
+    async function fetachuserListings() {
+      const listingsRef = collection(db, "listings");
+      const q = query(
+        listingsRef,
+        where("userRef", "==", auth.currentUser.uid),
+        orderBy("timestamp", "desc")
+      );
+      const querySnap = await getDocs(q);
+      let listings = [];
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+      setListings(listings);
+      console.log(listings);
+      setLoading(false);
+    }
+    fetachuserListings();
+  }, [auth.currentUser.uid]);
   return (
     <section className="px-4 py-6 max-w-6xl mx-auto ">
       <div className="p-8 bg-white shadow-xl mt-24 border-[0.5px] border-red-500/30">
@@ -140,9 +168,34 @@ export const Profile = () => {
             records all of his own music, giving it a warm, intimate feel with a
             solid groove structure. An artist of considerable range.
           </p>
-          <button className="text-indigo-500 py-2 px-4  font-medium mt-4">
-            Show more
+
+          <button
+            className={`text-indigo-500 py-2 px-4 font-md mt-4`}
+            onClick={() => {
+              setShowListings((prev) => !prev);
+            }}
+          >
+            {!showlistings ? "Show Listed Properties" : "Show less"}
           </button>
+        </div>
+        <div
+          id="listing"
+          className={showlistings ? "px-4 py-6 max-w-6xl mx-auto"  : "hidden"}
+        >
+          {!loading && listings.length > 0 && (
+            <div className="">
+              <div>
+              <h2 className="text-center text-2xl font-bold text-[#c40c1c] mb-4">
+                My Listings
+              </h2>
+              </div>
+              <div className="flex justify-between">
+              {listings.map((list) => (
+                <ListItem key={list.id} id={list.id} listing={list.data} />
+              ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

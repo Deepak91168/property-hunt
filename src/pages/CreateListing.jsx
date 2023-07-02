@@ -142,9 +142,11 @@ export const CreateListing = () => {
     });
     const formCopy = {
       ...formdata,
+      userRef: auth.currentUser.uid,
       imgUrls,
       geolocation,
       timestamp: serverTimestamp(),
+      
     };
     delete formCopy.images;
     !formCopy.offer && delete formCopy.priceDiscounted;
