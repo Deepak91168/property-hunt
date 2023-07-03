@@ -146,7 +146,6 @@ export const CreateListing = () => {
       imgUrls,
       geolocation,
       timestamp: serverTimestamp(),
-      
     };
     delete formCopy.images;
     !formdata.offer && delete formCopy.priceDiscounted;
@@ -156,10 +155,10 @@ export const CreateListing = () => {
     const docRef = await addDoc(collection(db, "listings"), formCopy);
     navigate(`/category/${formCopy.type}/${docRef.id}`);
     toast.success("Property Listed successfully!");
-
     setLoader(false);
   }
-
+  // TODO: Fix for priceRegular and priceDiscounted
+  // !Bug: Not gettting priceRegular and priceDiscounted from form to DB currently using regularPrice
   if (loader) return <Loader />;
   return (
     <section className="mt-6 flex max-h-full flex-col justify-center sm:px-6 lg:px-4 ">
