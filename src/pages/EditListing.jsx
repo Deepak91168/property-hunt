@@ -1,10 +1,3 @@
-// import React from 'react'
-
-// export const EditListing = () => {
-//   return (
-//     <div>EditListing</div>
-//   )
-// }
 import { useEffect, useState } from "react";
 import { Loader } from "../components/Loader";
 import { toast } from "react-toastify";
@@ -16,18 +9,10 @@ import {
 } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { v4 as uuid } from "uuid";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  serverTimestamp,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import "../styles/removeArrows.css";
 import { useNavigate, useParams } from "react-router";
-// import { ProgressBar } from "../components/ProgressBar";
 export const EditListing = () => {
   const [loader, setLoader] = useState(false);
   const [listing, setListing] = useState(null);

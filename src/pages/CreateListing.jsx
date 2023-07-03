@@ -13,7 +13,6 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import "../styles/removeArrows.css";
 import { useNavigate } from "react-router";
-// import { ProgressBar } from "../components/ProgressBar";
 export const CreateListing = () => {
   const navigate = useNavigate();
   const auth = getAuth();
