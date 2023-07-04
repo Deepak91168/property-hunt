@@ -6,6 +6,8 @@ import { IoMdTrash, IoMdCreate } from "react-icons/io";
 import { BiSolidOffer } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 // to={`/category/${listing.type}/${id}`}
+
+// TODO: Truncate if the length of string is larger than particular limit
 export const ListItem = ({ listing, id, onDelete, onEdit }) => {
   const navigate = useNavigate();
   const hollowbtn =
