@@ -35,7 +35,7 @@ export const SingleItem = () => {
       <ImageCarousel images={list.imgUrls} />
       <div class="max-w-6xl mx-auto">
         <div class="flex flex-wrap ">
-          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 p-4 border-2 border-red-500">
+          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 rounded-lg p-4 border-[1px] border-red-500">
             <div>
               <div className="">
                 <span className="font-semibold text-2xl mb-2 flex items-baseline">
@@ -92,7 +92,17 @@ export const SingleItem = () => {
           </div>
 
           <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 p-4 ">
-            {/* <!-- Content for the second div --> */}
+            {/* <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <Marker position={position}>
+                <Popup>
+                  A pretty CSS3 popup. <br /> Easily customizable.
+                </Popup>
+              </Marker>
+            </MapContainer> */}
           </div>
         </div>
       </div>
