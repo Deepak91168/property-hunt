@@ -6,6 +6,7 @@ import { Loader } from "../components/Loader";
 import ImageCarousel from "../components/ImageCarousel";
 import { FaBed, FaBath, FaParking, FaMapMarkerAlt } from "react-icons/fa";
 import { GiSofa } from "react-icons/gi";
+import { Label } from "../components/Label";
 export const SingleItem = () => {
   const params = useParams();
   const [list, setList] = useState(null);
@@ -33,23 +34,37 @@ export const SingleItem = () => {
     <section>
       <ImageCarousel images={list.imgUrls} />
       <div class="max-w-6xl mx-auto">
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap ">
           <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 p-4 border-2 border-red-500">
             <div>
               <div className="">
-                <spaan className="font-semibold text-2xl mb-2">
-                  {list.name}
-                </spaan>
+                <span className="font-semibold text-2xl mb-2 flex items-baseline">
+                  {list.name} - ₹
+                  {list.regularPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                  {!list.sale && (
+                    <p className="text-sm text-gray-500">/month</p>
+                  )}
+                </span>
               </div>
-
               <div className="mt-2 text-md text-red-500 font-semibold flex justify-center items-baseline">
                 <FaMapMarkerAlt className="text-[12px] p-0 mr-1" />
                 {list.address}
               </div>
-              <div className="mr-xl mt-2">
+              {/* <div className="mr-xl mt-2">
                 <hr className="p-[0.5px] bg-red-500"></hr>
+              </div> */}
+
+              <div className="flex space-x-2 mt-2">
+                <Label text={list.sale ? "Sale" : "Rent"} />
+                {list.furnished && <Label text="Furnished" />}
+                {list.parking && <Label text="Parking" />}
               </div>
-              <div className="py-2 text-sm text-gray-800">{list.description}</div>
+
+              <div className="py-1 text-sm text-gray-800">
+                {list.description}
+              </div>
               <div>
                 {/* Details */}
                 <ul className="flex mt-2">
@@ -59,16 +74,6 @@ export const SingleItem = () => {
                   <div className=" flex justify-center">
                     <FaBath className="text-xl" /> <p className="px-2">4</p>
                   </div>
-                  {list.parking && (
-                    <div className=" flex justify-center">
-                      <FaParking className="text-xl" /> <p className="px-2"></p>
-                    </div>
-                  )}
-                  {list.furnished && (
-                    <div className=" flex justify-center">
-                      <GiSofa className="text-xl" /> <p className="px-2"></p>
-                    </div>
-                  )}
                 </ul>
               </div>
               <div className="py-2">
@@ -86,7 +91,7 @@ export const SingleItem = () => {
             </div>
           </div>
 
-          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 p-4 border-2 border-red-500">
+          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 p-4 ">
             {/* <!-- Content for the second div --> */}
           </div>
         </div>
