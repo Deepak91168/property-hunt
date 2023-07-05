@@ -16,7 +16,7 @@ export const ListItem = ({ listing, id, onDelete, onEdit }) => {
   "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500";
   return (
     <div
-      className="border-[1px] border-[#c40c1c] rounded-lg shadow-md hover:cursor-pointer"
+      className="border-[2px] border-red-500 rounded-md shadow-md hover:cursor-pointer"
     >
       <div className="flex justify-center">
         <img className="h-48 pb-2" src={listing.imgUrls[0]} alt="" />
@@ -30,7 +30,7 @@ export const ListItem = ({ listing, id, onDelete, onEdit }) => {
           </div>
         </div>
         <div className="text-2xl flex font-semibold text-[#c40c1c]">
-          {"₹" + +listing.regularPrice}
+          {"₹" + listing.regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           <BiSolidOffer className="hidden" />
         </div>
 

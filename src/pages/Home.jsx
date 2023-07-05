@@ -37,7 +37,7 @@ export const Home = () => {
               navigate("/offers");
             }}
           >
-            Exploer
+            Explore
           </button>
           {!loggedin && (
             <button

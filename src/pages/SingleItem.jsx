@@ -35,6 +35,7 @@ export const SingleItem = () => {
   if (loader) {
     return <Loader />;
   }
+  
   return (
     <section>
       <ImageCarousel images={list.imgUrls} />
@@ -48,17 +49,17 @@ export const SingleItem = () => {
                   {list.regularPrice
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-                  {!list.sale && (
+                  {list.type === "rent" && (
                     <p className="text-sm text-gray-500">/month</p>
                   )}
                 </span>
               </div>
-              <div className="mt-2 text-md text-red-500 font-semibold flex justify-center items-baseline">
+              <div className="mt-2 text-md text-red-500 font-semibold flex items-baseline">
                 <FaMapMarkerAlt className="text-[12px] p-0 mr-1" />
                 {list.address}
               </div>
               <div className="flex space-x-2 mt-2">
-                <Label text={list.sale ? "Sale" : "Rent"} />
+                <Label text={list.type === "sell" ? "Sale" : "Rent"} />
                 {list.furnished && <Label text="Furnished" />}
                 {list.parking && <Label text="Parking" />}
               </div>
