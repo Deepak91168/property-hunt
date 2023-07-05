@@ -5,12 +5,17 @@ import { db } from "../firebase";
 import { Loader } from "../components/Loader";
 import ImageCarousel from "../components/ImageCarousel";
 import { FaBed, FaBath, FaParking, FaMapMarkerAlt } from "react-icons/fa";
-import { GiSofa } from "react-icons/gi";
+import { Marker, MapContainer, TileLayer, Popup } from "react-leaflet";
 import { Label } from "../components/Label";
+// TODO: Use exact location for latitude and longitude
 export const SingleItem = () => {
   const params = useParams();
   const [list, setList] = useState(null);
   const [loader, setLoader] = useState(true);
+  const position = {
+    lat: 60,
+    lng: 60,
+  };
   const fullbtn =
     "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500";
   useEffect(() => {
@@ -33,9 +38,9 @@ export const SingleItem = () => {
   return (
     <section>
       <ImageCarousel images={list.imgUrls} />
-      <div class="max-w-6xl mx-auto">
-        <div class="flex flex-wrap ">
-          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 rounded-lg p-4 border-[1px] border-red-500">
+      <div class="shadow-xl max-w-6xl rounded-lg mx-auto mt-4 lg:mx-auto border-[2px] border-red-500">
+        <div class="flex flex-col-reverse md:flex-row ">
+          <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 rounded-lg p-4 pb-0 mb-0">
             <div>
               <div className="">
                 <span className="font-semibold text-2xl mb-2 flex items-baseline">
@@ -52,10 +57,6 @@ export const SingleItem = () => {
                 <FaMapMarkerAlt className="text-[12px] p-0 mr-1" />
                 {list.address}
               </div>
-              {/* <div className="mr-xl mt-2">
-                <hr className="p-[0.5px] bg-red-500"></hr>
-              </div> */}
-
               <div className="flex space-x-2 mt-2">
                 <Label text={list.sale ? "Sale" : "Rent"} />
                 {list.furnished && <Label text="Furnished" />}
@@ -91,18 +92,23 @@ export const SingleItem = () => {
             </div>
           </div>
 
-          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 p-4 ">
-            {/* <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+          <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 p-0 h-72 sm:h-[400px]">
+            <MapContainer
+              center={[position.lat, position.lng]}
+              zoom={10}
+              scrollWheelZoom={true}
+              style={{ height: "100%", width: "100%" }}
+            >
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <Marker position={position}>
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
+              <Marker position={[position.lat, position.lng]}>
+                <Popup className="text-center">
+                  ({position.lat},{position.lng})
                 </Popup>
               </Marker>
-            </MapContainer> */}
+            </MapContainer>
           </div>
         </div>
       </div>

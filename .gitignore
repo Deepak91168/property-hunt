@@ -10,7 +10,7 @@
 
 # production
 /build
-FirebaseRules.txt
+./FirebaseRules.txt
 
 # misc
 .DS_Store
