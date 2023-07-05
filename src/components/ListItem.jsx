@@ -1,6 +1,4 @@
 import React from "react";
-import logo from "../assets/images/logo.png";
-import { Link } from "react-router-dom";
 import { FaBed, FaBath } from "react-icons/fa";
 import { IoMdTrash, IoMdCreate } from "react-icons/io";
 import { BiSolidOffer } from "react-icons/bi";
@@ -10,16 +8,15 @@ import { useNavigate } from "react-router-dom";
 // TODO: Truncate if the length of string is larger than particular limit
 export const ListItem = ({ listing, id, onDelete, onEdit }) => {
   const navigate = useNavigate();
-  const hollowbtn =
-  "w-full flex justify-center items-center py-2 px-4 border border-red-500 rounded-md shadow-sm text-sm font-medium text-red-500 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500";
   const fullbtn =
-  "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500";
+    "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500";
+    if(!listing){
+      return;
+    }
   return (
-    <div
-      className="border-[2px] border-red-500 rounded-md shadow-md hover:cursor-pointer"
-    >
+    <div className="border-[1px] border-red-500 rounded-md shadow-md hover:cursor-pointer">
       <div className="flex justify-center">
-        <img className="h-48 pb-2" src={listing.imgUrls[0]} alt="" />
+        <img className="h-36 pb-2" src={listing.imgUrls[0]} alt="" />
       </div>
       <hr className="mx-2 bg-[#c40c1c] h-[2px]"></hr>
       <div className="p-2">
@@ -30,7 +27,10 @@ export const ListItem = ({ listing, id, onDelete, onEdit }) => {
           </div>
         </div>
         <div className="text-2xl flex font-semibold text-[#c40c1c]">
-          {"₹" + listing.regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          {"₹" +
+            listing.regularPrice
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           <BiSolidOffer className="hidden" />
         </div>
 
@@ -71,7 +71,14 @@ export const ListItem = ({ listing, id, onDelete, onEdit }) => {
             </div>
           </div>
           <div className="w-full flex justify-end mt-3">
-            <button onClick={() => {navigate(`/category/${listing.type}/${id}`)}} className={fullbtn} >More Detailes</button>
+            <button
+              onClick={() => {
+                navigate(`/category/${listing.type}/${id}`);
+              }}
+              className={fullbtn}
+            >
+              More Detailes
+            </button>
           </div>
         </div>
       </div>

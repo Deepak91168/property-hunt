@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { collection, orderBy, query, where, limit } from "firebase/firestore";
+import {
+  collection,
+  orderBy,
+  query,
+  where,
+  limit,
+  startAfter,
+} from "firebase/firestore";
 import { getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { Loader } from "../components/Loader";
 import { ListItem } from "../components/ListItem";
+// TODO: Fox load button it should immediately disapper when all items are fetched
+
 export const Offers = () => {
   const [list, setList] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -46,7 +55,8 @@ export const Offers = () => {
         listRef,
         where("offer", "==", true),
         orderBy("timestamp", "desc"),
-        limit(8)
+        startAfter(prevfetch),
+        limit(4)
       );
 
       const querySnap = await getDocs(q);
@@ -59,7 +69,8 @@ export const Offers = () => {
           data: doc.data(),
         });
       });
-      setList(list);
+      setList((prev) => [...prev, ...list]);
+      console.log(list);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -72,7 +83,7 @@ export const Offers = () => {
         {loading && <Loader />}
         {list && list.length > 0 && (
           <div className="max-w-6xl p-2 mt-6 flex w-full ">
-            <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="pb-2 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {list.map((list) => (
                 <ListItem key={list.id} id={list.id} listing={list.data} />
               ))}
@@ -80,7 +91,13 @@ export const Offers = () => {
           </div>
         )}
       </div>
-      {(prevfetch && list.length > 8) && <button onClick={fetchmore}>Load More</button>}
+      {prevfetch && list.length >= 8 && (
+        <div className="flex justify-center mb-0 pb-2">
+          <button className="text-gray-500 text-sm" onClick={fetchmore}>
+            Load More
+          </button>
+        </div>
+      )}
     </>
   );
 };
