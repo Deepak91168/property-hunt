@@ -4,8 +4,8 @@ import { useParams } from "react-router";
 import { db } from "../firebase";
 import { Loader } from "../components/Loader";
 import ImageCarousel from "../components/ImageCarousel";
-import { FaBed, FaBath, FaParking, FaMapMarkerAlt } from "react-icons/fa";
-import { Marker, MapContainer, TileLayer, Popup } from "react-leaflet";
+import { FaBed, FaBath, FaMapMarkerAlt } from "react-icons/fa";
+import { MapComponent } from "../components/MapComponent";
 import { Label } from "../components/Label";
 // TODO: Use exact location for latitude and longitude
 export const SingleItem = () => {
@@ -93,22 +93,7 @@ export const SingleItem = () => {
           </div>
 
           <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 p-0 h-72 sm:h-[400px]">
-            <MapContainer
-              center={[position.lat, position.lng]}
-              zoom={10}
-              scrollWheelZoom={true}
-              style={{ height: "100%", width: "100%" }}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <Marker position={[position.lat, position.lng]}>
-                <Popup className="text-center">
-                  ({position.lat},{position.lng})
-                </Popup>
-              </Marker>
-            </MapContainer>
+            <MapComponent position={position} />
           </div>
         </div>
       </div>
