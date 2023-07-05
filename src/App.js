@@ -10,6 +10,7 @@ import { NavBar } from "./components/NavBar";
 import { ToastContainer } from "react-toastify";
 import { EditListing } from "./pages/EditListing";
 import { SingleItem } from "./pages/SingleItem";
+import { About } from "./pages/About";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/singin" element={<SignIn />} />
           <Route path="/singup" element={<SignUp />} />
+          <Route path="/about" element={<About />} />
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>

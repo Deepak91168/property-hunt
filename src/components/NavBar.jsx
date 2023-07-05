@@ -63,6 +63,14 @@ export const NavBar = () => {
               Offers
             </li>
             <li
+              className={` cursor-pointer ${
+                checkPath("/about") && " text-[#c40c1c] font-bold "
+              }`}
+              onClick={() => navigate("/about")}
+            >
+              About
+            </li>
+            <li
               className={` cursor-pointer  ${
                 (checkPath("/singin") || checkPath("/profile")) &&
                 "text-[#c40c1c] font-bold "
