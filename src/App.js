@@ -13,6 +13,7 @@ import { SingleItem } from "./pages/SingleItem";
 import { About } from "./pages/About";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./components/PrivateRoute";
+import {Footer} from "./components/Footer";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           />
         </Routes>
       </Router>
+      <Footer />
       <ToastContainer
         position="bottom-center"
         autoClose={5000}
