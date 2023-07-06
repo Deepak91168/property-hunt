@@ -7,8 +7,12 @@ import ImageCarousel from "../components/ImageCarousel";
 import { FaBed, FaBath, FaMapMarkerAlt } from "react-icons/fa";
 import { MapComponent } from "../components/MapComponent";
 import { Label } from "../components/Label";
+import { getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
 // TODO: Use exact location for latitude and longitude
 export const SingleItem = () => {
+  const auth = getAuth();
+  // console.log("Current user" + auth.currentUser.uid);
   const params = useParams();
   const [list, setList] = useState(null);
   const [loader, setLoader] = useState(true);
@@ -32,10 +36,26 @@ export const SingleItem = () => {
     }
     fetchListing();
   }, [params.listingID]);
+  const [owneremail, setOwnerEmail] = useState("ds9210048@gmail.com");
+  // useEffect(()=> {
+  //   const getOwner = async () => {
+  //     const docRef = doc(db,"users",list.userRef);
+  //     const docSnap = await getDoc(docRef);
+  //     if(docSnap.exists()){
+  //       console.log(docSnap.data());
+  //       setOwnerEmail(docSnap.data().email)
+  //     }
+  //     else{
+  //       toast.error("Not able to get owener's email")
+  //     }
+  //   }
+  //   getOwner()
+  // },[list.userRef])
+  // console.log(owneremail)
   if (loader) {
     return <Loader />;
   }
-  
+
   return (
     <section>
       <ImageCarousel images={list.imgUrls} />
@@ -64,8 +84,8 @@ export const SingleItem = () => {
                 {list.parking && <Label text="Parking" />}
               </div>
 
-              <div className="py-1 text-sm text-gray-800">
-                {list.description}
+              <div className="py-1 text-sm text-gray-800 w-full break-words">
+                <div className="">{list.description}</div>
               </div>
               <div>
                 {/* Details */}
@@ -78,18 +98,20 @@ export const SingleItem = () => {
                   </div>
                 </ul>
               </div>
-              <div className="py-2">
-                <form className="flex flex-col">
-                  <textarea
-                    className="mb-4 no-number-arrows mr-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                    type="text"
-                    placeholder="Write a message to owner"
-                  />
-                  <button type="submit" className={fullbtn}>
-                    Send Email
-                  </button>
-                </form>
-              </div>
+              {list && list.userRef !== auth.currentUser?.uid && (
+                <div className="py-2">
+                  <form className="flex flex-col">
+                    <textarea
+                      className="mb-4 no-number-arrows mr-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                      type="text"
+                      placeholder="Write a message to owner"
+                    />
+                    <button type="submit" className={fullbtn}>
+                      Send Email
+                    </button>
+                  </form>
+                </div>
+              )}
             </div>
           </div>
 

@@ -176,6 +176,7 @@ export const CreateListing = () => {
               </label>
               <div className="mt-1">
                 <input
+                  required
                   onChange={onchange}
                   id="name"
                   name="name"
@@ -247,6 +248,7 @@ export const CreateListing = () => {
               <p className="block text-sm font-medium text-gray-700">Rooms</p>
               <div className="flex items-center justify-around mt-2">
                 <input
+                  required
                   id="bed"
                   name="bed"
                   type="number"
@@ -257,6 +259,7 @@ export const CreateListing = () => {
                   className="no-number-arrows mr-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                 />
                 <input
+                  required
                   id="bath"
                   min={1}
                   name="bath"
@@ -277,6 +280,7 @@ export const CreateListing = () => {
               </label>
               <div className="mt-1">
                 <textarea
+                  required
                   id="address"
                   name="address"
                   type="text"
@@ -289,6 +293,7 @@ export const CreateListing = () => {
             </div>
             <div className="flex items-center justify-around mt-2">
               <input
+                required
                 id="latitude"
                 name="latitude"
                 max="90"
@@ -301,6 +306,7 @@ export const CreateListing = () => {
               />
 
               <input
+                required
                 id="longitude"
                 name="longitude"
                 placeholder="longitude"
@@ -321,6 +327,7 @@ export const CreateListing = () => {
               </label>
               <div className="mt-1">
                 <textarea
+                  required
                   id="description"
                   name="description"
                   type="text"
@@ -363,6 +370,7 @@ export const CreateListing = () => {
 
                 <div className="flex items-center justify-around mt-2">
                   <input
+                    required
                     id="regularPrice"
                     name="regularPrice"
                     type="number"
@@ -373,6 +381,7 @@ export const CreateListing = () => {
                   />
                   {offer && (
                     <input
+                      required
                       id="discounted"
                       name="discounted"
                       placeholder="Discounted"
@@ -416,6 +425,7 @@ export const CreateListing = () => {
                     </p>
                   </div>
                   <input
+                    required
                     id="images"
                     multiple
                     onChange={onchange}

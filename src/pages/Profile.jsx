@@ -99,8 +99,8 @@ export const Profile = () => {
     if (window.confirm("Are you Sure?")) {
       await deleteDoc(doc(db, "listings", listID));
       const updatedList = listings.filter((list) => list.id !== listID);
-      setListings(updatedList)
-      toast.success("Successfully Deleted!")
+      setListings(updatedList);
+      toast.success("Successfully Deleted!");
     }
   }
   function onEdit(listID) {
@@ -192,6 +192,11 @@ export const Profile = () => {
           id="listing"
           className={showlistings ? "px-4 py-6 max-w-6xl mx-auto" : "hidden"}
         >
+          {!loading && listings.length === 0 && (
+            <p className="mx-auto text-sm text-gray-400">
+              No Property listed Yet!
+            </p>
+          )}
           {!loading && listings.length > 0 && (
             <div className="">
               <div>
