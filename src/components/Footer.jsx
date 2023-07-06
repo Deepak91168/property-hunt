@@ -22,7 +22,7 @@ export const Footer = () => {
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="">
                   <a
-                    href="https://flowbite.com/"
+                    href="/"
                     className="text-white hover:underline"
                   >
                     Home
@@ -30,7 +30,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="https://tailwindcss.com/"
+                    href="/offers"
                     className="text-white hover:underline"
                   >
                     Offers
@@ -38,7 +38,7 @@ export const Footer = () => {
                 </li>
                 <li className="mb-4">
                   <a
-                    href="https://flowbite.com/"
+                    href="/about"
                     className="text-white hover:underline"
                   >
                     About
@@ -53,7 +53,7 @@ export const Footer = () => {
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="">
                   <a
-                    href="https://github.com/themesberg/flowbite"
+                    href="https://github.com/Deepak91168/property-hunt"
                     className="hover:underline text-white"
                   >
                     Github
@@ -61,7 +61,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="https://discord.gg/4eeurUVvTy"
+                    href="/"
                     className="hover:underline text-white"
                   >
                     Discord

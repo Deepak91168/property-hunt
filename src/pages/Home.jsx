@@ -51,7 +51,7 @@ export const Home = () => {
           )}
         </div>
       </div>
-      <div className="bg-red-500 h-96 "></div>
+      {/* <div className="bg-red-500 h-96 "></div> */}
     </div>
   );
 };
