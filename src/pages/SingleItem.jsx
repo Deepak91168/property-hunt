@@ -39,7 +39,7 @@ export const SingleItem = () => {
   return (
     <section>
       <ImageCarousel images={list.imgUrls} />
-      <div class="shadow-xl max-w-6xl rounded-lg mx-auto mt-4 lg:mx-auto border-[2px] border-red-500">
+      <div class="shadow-xl max-w-6xl rounded-lg mx-auto mt-4 lg:mx-auto border-[2px] border-red-500 mb-12">
         <div class="flex flex-col-reverse md:flex-row ">
           <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 rounded-lg p-4 pb-0 mb-0">
             <div>
