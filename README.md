@@ -48,21 +48,19 @@ for users to upload property details, images, and manage their listings. Users c
 
 ## Contributing
 
-```
 Contributions are always welcome :)
 
-Can work upon the [issues](https://github.com/Deepak91168/property-hunt.git/issues) mentioned and
+Can work upon the [issues](https://github.com/Deepak91168/property-hunt/issues) mentioned and
 
 1. Fork the Repository
 2. Create your featureBranch.
 3. Commit your changes (`git commit -m "Added amazingFeature"`)
 4. Push to the branch (`git push origin feature/amazingFeature`)
 5. Open up a Pull Request.
-```
+
 
 ## References
-
-```bash
+```
 # Frontend
 -Reactjs
   https://legacy.reactjs.org/docs/getting-started.html
