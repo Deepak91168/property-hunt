@@ -32,6 +32,10 @@
  npm start
 ```
 
+## Screenshot
+![Home Page](./src/assets/images/property-hunt.png)
+
+
 ## Contributing
 
 ```
