@@ -1,15 +1,18 @@
 # Property Hunt
 
-<!-- A Web App for the publishing of the Research Papers all over the World. -->
+A web application enabling users to buy, sell, and list properties for rent or sale. Implemented features
+for users to upload property details, images, and manage their listings. Users can also update their profile.
 
 ## 🛠 Tech Stack
 
+[![HTML Badge](https://img.shields.io/badge/-HTML-%23E34F26?style=for-the-badge&logo=html5&logoColor=white)](#)
+[![CSS Badge](https://img.shields.io/badge/-CSS-%231572B6?style=for-the-badge&logo=css3&logoColor=white)](#)
+[![JavaScript Badge](https://img.shields.io/badge/-JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
+[![Tailwind CSS Badge](https://img.shields.io/badge/-Tailwind_CSS-%2338B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](#)
+[![React.js Badge](https://img.shields.io/badge/-React.js-%2361DAFB?style=for-the-badge&logo=react&logoColor=white)](#)
+[![Firebase Badge](https://img.shields.io/badge/-Firebase-%23FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](#)
+[![Markdown Badge](https://img.shields.io/badge/-Markdown-%23000000?style=for-the-badge&logo=markdown&logoColor=white)](#)
 
-[![JavaScript Badge](https://img.shields.io/badge/-JavaScript-yellow?style=flat-square&logo=javascript&logoColor=white)](#)
-[![Tailwind CSS Badge](https://img.shields.io/badge/-Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](#)
-[![React.js Badge](https://img.shields.io/badge/-React.js-61DAFB?style=flat-square&logo=react&logoColor=white)](#)
-[![JSX Badge](https://img.shields.io/badge/-JSX-61DAFB?style=flat-square&logo=react&logoColor=white)](#)
-[![Firebase Badge](https://img.shields.io/badge/-Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=white)](#)
 
 ## Installation
 
