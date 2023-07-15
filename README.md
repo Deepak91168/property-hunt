@@ -1,5 +1,7 @@
 # Property Hunt
 
+🌐 Deployed Link : https://property-hunt.vercel.app/
+
 A web application enabling users to buy, sell, and list properties for rent or sale. Implemented features
 for users to upload property details, images, and manage their listings. Users can also update their profile.
 
@@ -11,7 +13,6 @@ for users to upload property details, images, and manage their listings. Users c
 [![Tailwind CSS Badge](https://img.shields.io/badge/-Tailwind_CSS-%2338B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](#)
 [![React.js Badge](https://img.shields.io/badge/-React.js-%2361DAFB?style=for-the-badge&logo=react&logoColor=white)](#)
 [![Firebase Badge](https://img.shields.io/badge/-Firebase-%23FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](#)
-[![Markdown Badge](https://img.shields.io/badge/-Markdown-%23000000?style=for-the-badge&logo=markdown&logoColor=white)](#)
 
 
 ## Installation
