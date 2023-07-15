@@ -13,6 +13,7 @@ for users to upload property details, images, and manage their listings. Users c
 [![Tailwind CSS Badge](https://img.shields.io/badge/-Tailwind_CSS-%2338B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](#)
 [![React.js Badge](https://img.shields.io/badge/-React.js-%2361DAFB?style=for-the-badge&logo=react&logoColor=white)](#)
 [![Firebase Badge](https://img.shields.io/badge/-Firebase-%23FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](#)
+[![Vercel Badge](https://img.shields.io/badge/-Vercel-%23000000?style=for-the-badge&logo=vercel&logoColor=white)](#)
 
 
 ## Installation
@@ -52,7 +53,6 @@ Contributions are always welcome :)
 
 Can work upon the [issues](https://github.com/Deepak91168/property-hunt.git/issues) mentioned and
 
-
 1. Fork the Repository
 2. Create your featureBranch.
 3. Commit your changes (`git commit -m "Added amazingFeature"`)
@@ -63,14 +63,18 @@ Can work upon the [issues](https://github.com/Deepak91168/property-hunt.git/issu
 ## References
 
 ```bash
-#Frontend
+# Frontend
 -Reactjs
- https://legacy.reactjs.org/docs/getting-started.html
+  https://legacy.reactjs.org/docs/getting-started.html
 
 -Tailwind
- https://v2.tailwindcss.com/docs
+  https://v2.tailwindcss.com/docs
 
-#Backend
+# Backend
 -Firebase
- https://firebase.google.com/docs/web/setup
+  https://firebase.google.com/docs/web/setup
+
+# Hosting
+-Vercel
+  https://vercel.com/guides/deploying-react-with-vercel
 ```
