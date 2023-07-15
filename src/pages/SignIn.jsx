@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/images/logo.png";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { OAuth } from "../components/OAuth";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 export const SignIn = () => {
+  const [token, setToken] = useState(null);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [signinData, setsigninData] = useState({
@@ -22,8 +20,13 @@ export const SignIn = () => {
       [event.target.id]: event.target.value,
     }));
   };
-  async function onsubmit(event){
+  useEffect(() => {
+    console.log(token);
+  }, [token]);
+
+  async function onsubmit(event) {
     event.preventDefault();
+    console.log("Try ke bhar");
     try {
       const auth = getAuth();
       const userCredentials = await signInWithEmailAndPassword(
@@ -31,13 +34,16 @@ export const SignIn = () => {
         email,
         password
       );
-      if(userCredentials.user){
-        navigate('/')
+      console.log("LOL");
+      if (userCredentials.user) {
+        setToken("This is a token");
+        navigate("/");
       }
     } catch (error) {
-      toast.error("Wrong Password!")
+      toast.error("Wrong Password!");
     }
   }
+
   return (
     <section className="min-h-screen flex flex-col justify-center sm:px-6 lg:px-8 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-md ">
@@ -113,7 +119,7 @@ export const SignIn = () => {
               </div>
               <div className="text-sm">
                 <Link
-                  to='/singup'
+                  to="/singup"
                   className="font-medium text-red-500 hover:text-red-700"
                 >
                   Create new account
@@ -128,7 +134,7 @@ export const SignIn = () => {
               >
                 Sign in
               </button>
-              <OAuth/>
+              <OAuth />
             </div>
           </form>
         </div>
