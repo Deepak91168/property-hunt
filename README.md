@@ -2,9 +2,14 @@
 
 <!-- A Web App for the publishing of the Research Papers all over the World. -->
 
-<!-- ## 🛠 Tech Stack
+## 🛠 Tech Stack
 
-![html](https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white) ![css](https://img.shields.io/badge/CSS-FF2D20?&style=for-the-badge&logo=css3&logoColor=white) ![js](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![python](https://img.shields.io/badge/Python-217346?style=for-the-badge&logo=python&logoColor=white) ![django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white) ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white) ![SQLITE](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white) -->
+
+[![JavaScript Badge](https://img.shields.io/badge/-JavaScript-yellow?style=flat-square&logo=javascript&logoColor=white)](#)
+[![Tailwind CSS Badge](https://img.shields.io/badge/-Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](#)
+[![React.js Badge](https://img.shields.io/badge/-React.js-61DAFB?style=flat-square&logo=react&logoColor=white)](#)
+[![JSX Badge](https://img.shields.io/badge/-JSX-61DAFB?style=flat-square&logo=react&logoColor=white)](#)
+[![Firebase Badge](https://img.shields.io/badge/-Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=white)](#)
 
 ## Installation
 
