@@ -1,13 +1,16 @@
 import { useLocation, useNavigate } from "react-router";
 import logo from "../assets/images/logo.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import ThemeContext from "../context/ThemeContext";
 // #c40c1c
 export const NavBar = () => {
   //true = Sign in
   const [pageState, setPageState] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+  const theme = useContext(ThemeContext);
+
   const pathUrl = location.pathname;
   const auth = getAuth();
   const svg = (
@@ -32,15 +35,26 @@ export const NavBar = () => {
   const checkPath = (currentRoute) => {
     return currentRoute === pathUrl;
   };
+
+  const NavBg = theme ? "bg-black" : "bg-white";
+  const navIconTextColor = "text-[#c40c1c]";
+
+  const applyTheme = navIconTextColor + " font-bold";
+  console.log(applyTheme);
+
   return (
-    <header className="border-b-[1px] shadow-md sticky top-0 z-50 bg-white">
+    <header className={`border-b-[1px] shadow-md sticky top-0 z-50 ${NavBg} `}>
       <div className="flex justify-between items-center px-4 py-6 max-w-6xl mx-auto">
         <div
           className="flex justify-center items-center cursor-pointer"
           onClick={() => navigate("/")}
         >
           <img src={logo} className="h-8 cursor-pointer" alt="logo" />
-          <h3 className="ml-4 font-bold text-[#c40c1c] text-lg">
+          <h3
+            className={`ml-4 font-bold ${
+              theme ? "text-white" : navIconTextColor
+            } text-lg`}
+          >
             Property Hunt
           </h3>
         </div>
@@ -48,7 +62,9 @@ export const NavBar = () => {
           <ul className="flex justify-center items-center space-x-6">
             <li
               className={` cursor-pointer ${
-                checkPath("/") && " text-[#c40c1c] font-bold "
+                !theme
+                  ? (checkPath("/") && applyTheme) || "text-black font-bold"
+                  : (checkPath("/") && applyTheme) || "text-white font-bold"
               }`}
               onClick={() => navigate("/")}
             >
@@ -56,7 +72,11 @@ export const NavBar = () => {
             </li>
             <li
               className={` cursor-pointer ${
-                checkPath("/offers") && " text-[#c40c1c] font-bold "
+                !theme
+                  ? (checkPath("/offers") && applyTheme) ||
+                    "text-black font-bold"
+                  : (checkPath("/offers") && applyTheme) ||
+                    "text-white font-bold"
               }`}
               onClick={() => navigate("/offers")}
             >
@@ -64,7 +84,11 @@ export const NavBar = () => {
             </li>
             <li
               className={` cursor-pointer ${
-                checkPath("/about") && " text-[#c40c1c] font-bold "
+                !theme
+                  ? (checkPath("/about") && applyTheme) ||
+                    "text-black font-bold"
+                  : (checkPath("/about") && applyTheme) ||
+                    "text-white font-bold"
               }`}
               onClick={() => navigate("/about")}
             >
@@ -72,8 +96,13 @@ export const NavBar = () => {
             </li>
             <li
               className={` cursor-pointer  ${
-                (checkPath("/singin") || checkPath("/profile")) &&
-                "text-[#c40c1c] font-bold "
+                !theme
+                  ? ((checkPath("/singin") || checkPath("/profile")) &&
+                      applyTheme) ||
+                    "text-black font-bold"
+                  : ((checkPath("/singin") || checkPath("/profile")) &&
+                      applyTheme) ||
+                    "text-white font-bold"
               }`}
               onClick={() => navigate("/profile")}
             >

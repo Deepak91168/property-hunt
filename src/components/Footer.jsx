@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../assets/images/logo.png";
+import ThemeContext from "../context/ThemeContext";
 export const Footer = () => {
+  const theme = useContext(ThemeContext);
   // #c40c1c
+  const footerTheme = theme
+    ? "bg-black"
+    : " bg-gradient-to-r from-red-400 via-red-700 to-red-400";
+  console.log(footerTheme);
   return (
-    <footer className="bg-gradient-to-r from-red-400 via-red-700 to-red-400 border-t-[2px] shadow-md">
+    <footer className={` ${footerTheme} border-t-[2px] shadow-md`}>
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
@@ -21,26 +27,17 @@ export const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="">
-                  <a
-                    href="/"
-                    className="text-white hover:underline"
-                  >
+                  <a href="/" className="text-white hover:underline">
                     Home
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="/offers"
-                    className="text-white hover:underline"
-                  >
+                  <a href="/offers" className="text-white hover:underline">
                     Offers
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a
-                    href="/about"
-                    className="text-white hover:underline"
-                  >
+                  <a href="/about" className="text-white hover:underline">
                     About
                   </a>
                 </li>
@@ -60,10 +57,7 @@ export const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="/"
-                    className="hover:underline text-white"
-                  >
+                  <a href="/" className="hover:underline text-white">
                     Discord
                   </a>
                 </li>
