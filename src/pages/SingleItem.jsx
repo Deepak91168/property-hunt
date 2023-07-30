@@ -1,5 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { db } from "../firebase";
 import { Loader } from "../components/Loader";
@@ -9,8 +9,10 @@ import { MapComponent } from "../components/MapComponent";
 import { Label } from "../components/Label";
 import { getAuth } from "firebase/auth";
 import { toast } from "react-toastify";
+import ThemeContext from "../context/ThemeContext";
 // TODO: Use exact location for latitude and longitude
 export const SingleItem = () => {
+  const theme = useContext(ThemeContext);
   const auth = getAuth();
   // console.log("Current user" + auth.currentUser.uid);
   const params = useParams();
@@ -59,18 +61,22 @@ export const SingleItem = () => {
   return (
     <section>
       <ImageCarousel images={list.imgUrls} />
-      <div class="shadow-xl max-w-6xl rounded-lg mx-auto mt-4 lg:mx-auto border-[2px] border-red-500 mb-12">
+      <div
+        class={`shadow-xl max-w-6xl rounded-lg mx-auto mt-4 lg:mx-auto border-[2px] ${
+          theme ? "border-white" : "border-red-500"
+        } mb-12`}
+      >
         <div class="flex flex-col-reverse md:flex-row ">
           <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 rounded-lg p-4 pb-0 mb-0">
             <div>
-              <div className="">
+              <div className={`${theme ? "text-white" : ""}`}>
                 <span className="font-semibold text-2xl mb-2 flex items-baseline">
                   {list.name} - ₹
                   {list.regularPrice
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
                   {list.type === "rent" && (
-                    <p className="text-sm text-gray-500">/month</p>
+                    <p className="text-sm text-gray-400">/month</p>
                   )}
                 </span>
               </div>
@@ -89,7 +95,7 @@ export const SingleItem = () => {
               </div>
               <div>
                 {/* Details */}
-                <ul className="flex mt-2">
+                <ul className={`flex mt-2 ${theme ? "text-white" : ""}`}>
                   <div className=" flex justify-center">
                     <FaBed className="text-2xl " /> <p className="px-2">4</p>
                   </div>

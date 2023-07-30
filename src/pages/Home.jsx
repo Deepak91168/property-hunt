@@ -1,17 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import homeurl from "../assets/images/home.png";
 import { TypeEffect } from "../components/TypeEffect";
 import { useNavigate } from "react-router";
 import { useAuthStatus } from "../hooks/useAuthStatus";
 import { Loader } from "../components/Loader";
-const fullbtn =
-  "w-full flex justify-center py-2 px-4 border-2 border-transparent rounded-md shadow-sm text-md font-medium text-white bg-red-600  hover:text-red-700 hover:bg-transparent hover:border-2 hover:border-red-500 focus:outline-none transition-all focus:ring-2 focus:ring-offset-2 focus:ring-red-500";
+import ThemeContext from "../context/ThemeContext";
 export const Home = () => {
+  const theme = useContext(ThemeContext);
   const navigate = useNavigate();
   const { loggedin, checkingstatus } = useAuthStatus();
   if (checkingstatus) {
     return <Loader />;
   }
+
+  const textColor = (value) => {
+    return theme ? "text-black" : value;
+  };
+
+  const btnTheme = theme
+    ? "bg-black hover:text-black hover:border-black focus:ring-gray-500 "
+    : "bg-red-600  hover:text-red-700 hover:border-red-500 ";
+
+  const fullbtn =
+    btnTheme +
+    " w-full flex justify-center py-2 px-4 border-2 border-transparent rounded-md shadow-sm text-md font-medium text-white  hover:bg-transparent hover:border-2  focus:outline-none transition-all focus:ring-2 focus:ring-offset-2 ";
 
   return (
     <div
@@ -19,12 +31,20 @@ export const Home = () => {
       style={{ backgroundImage: `url(${homeurl})` }}
     >
       <div className=" h-full flex flex-col items-center justify-center mb-4 z-10 ">
-        <div className="font-extrabold text-2xl sm:text-3xl text-[#c40c1c] pb-4">
+        <div
+          className={`font-extrabold text-2xl sm:text-3xl ${textColor(
+            "text-[#c40c1c]"
+          )} pb-4`}
+        >
           Welcome to Property Hunt
         </div>
-        <div className="text-center text-4xl sm:text-6xl font-extrabold text-red-500">
+        <div
+          className={`text-center text-4xl sm:text-6xl font-extrabold ${textColor(
+            "text-red-500"
+          )} `}
+        >
           Your Gateway to Exceptional Properties <br /> Discover{" "}
-          <span className="text-[#c40c1c]">
+          <span className={`${theme ? "text-gray-500" : "text-[#c40c1c]"}`}>
             {" "}
             <TypeEffect />{" "}
           </span>

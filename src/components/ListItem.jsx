@@ -1,32 +1,57 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaBed, FaBath } from "react-icons/fa";
 import { IoMdTrash, IoMdCreate } from "react-icons/io";
 import { BiSolidOffer } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import ThemeContext from "../context/ThemeContext";
 // to={`/category/${listing.type}/${id}`}
 
 // TODO: Truncate if the length of string is larger than particular limit
 export const ListItem = ({ listing, id, onDelete, onEdit }) => {
   const navigate = useNavigate();
+  const theme = useContext(ThemeContext);
+
+  const btnTheme = theme
+    ? "bg-white text-black hover:text-white hover:border-white focus:ring-gray-500   "
+    : "bg-red-600  hover:text-red-700 hover:border-red-500  ";
+
   const fullbtn =
-    "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500";
-    if(!listing){
-      return;
-    }
+    btnTheme +
+    " w-full flex justify-center py-2 px-4 border-2 border-transparent rounded-md shadow-sm text-md font-medium hover:bg-transparent   hover:border-2  focus:outline-none transition-all focus:ring-2 focus:ring-offset-2 ";
+  if (!listing) {
+    return;
+  }
+
+  const color = (value1, value2) => {
+    return theme ? value1 : value2;
+  };
+
   return (
-    <div className="border-[1px] border-red-500 rounded-md shadow-md hover:cursor-pointer">
+    <div
+      className={`border-[1px]  ${color(
+        "border-white shadow-white",
+        "border-red-500"
+      )} rounded-md shadow-md hover:cursor-pointer`}
+    >
       <div className="flex justify-center">
         <img className="h-36 pb-2" src={listing.imgUrls[0]} alt="" />
       </div>
-      <hr className="mx-2 bg-[#c40c1c] h-[2px]"></hr>
-      <div className="p-2">
+      <hr
+        className={`mx-2 ${color("border-white", "bg-[#c40c1c]")} h-[2px]`}
+      ></hr>
+      <div className={`p-2 ${color(" text-white", " ")}`}>
         <div className="pt-2">
           <span className="font-bold">{listing.name}</span>
           <div className="flex justify-start mb-2 pr-2">
             <p className="text-sm">{listing.address}</p>
           </div>
         </div>
-        <div className="text-2xl flex font-semibold text-[#c40c1c]">
+        <div
+          className={`text-2xl flex font-semibold ${color(
+            "text-white",
+            "text-[#c40c1c]"
+          )}`}
+        >
           {"₹" +
             listing.regularPrice
               .toString()

@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import ThemeContext from "../context/ThemeContext";
 
 export const About = () => {
+  const theme = useContext(ThemeContext);
+  const textColor = (value) => {
+    return theme ? "text-white" : value;
+  };
+
   return (
-    <div className="h-full mt-14 mb-24 max-w-6xl mx-auto flex flex-col justify-center items-center">
-      <div className="text-4xl font-bold text-red-500 mb-4">About</div>
-      <div className="border-2 mx-4 border-red-500 p-4 shadow-lg rounded-lg">
+    <div
+      className={`h-full mt-14 mb-24 max-w-6xl mx-auto flex flex-col justify-center items-center`}
+    >
+      <div className={`text-4xl font-bold ${textColor("text-red-500")}  mb-4`}>
+        About
+      </div>
+      <div
+        className={`border-2 mx-4 ${
+          theme ? "border-white shadow-white text-white" : "border-red-500"
+        } p-4 shadow-lg rounded-lg`}
+      >
         Welcome to Property Hunt, your ultimate destination for all your real
         estate needs. Whether you are looking to buy, sell, or invest in
         properties, we are here to assist you every step of the way. With our
