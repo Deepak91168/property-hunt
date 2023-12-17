@@ -1,6 +1,6 @@
 # Property Hunt
 
-🌐 Deployed Link : https://property-hunt.vercel.app/
+🌐 Deployed Link : [`https://property-hunt.vercel.app/`](https://property-hunt.vercel.app/)
 
 A web application enabling users to buy, sell, and list properties for rent or sale. Implemented features
 for users to upload property details, images, and manage their listings. Users can also update their profile.
@@ -50,29 +50,24 @@ for users to upload property details, images, and manage their listings. Users c
 
 Contributions are always welcome :)
 
-Can work upon the [issues](https://github.com/Deepak91168/property-hunt/issues) mentioned and
+Can work upon the [`issues`](https://github.com/Deepak91168/property-hunt/issues) mentioned and
 
 1. Fork the Repository
 2. Create your featureBranch.
-3. Commit your changes (`git commit -m "Added amazingFeature"`)
-4. Push to the branch (`git push origin feature/amazingFeature`)
+3. Commit your changes
+```
+  git commit -m "Added amazingFeature
+``` 
+4. Push to the branch
+```
+  git push origin feature/amazingFeature
+```
 5. Open up a Pull Request.
 
 
 ## References
-```
-# Frontend
--Reactjs
-  https://legacy.reactjs.org/docs/getting-started.html
+- [`Reactjs`](https://legacy.reactjs.org/docs/getting-started.html)
+- [`Tailwind`](https://v2.tailwindcss.com/docs)
+- [`Firebase`](https://firebase.google.com/docs/web/setup)
+- [`Vercel`](https://vercel.com/guides/deploying-react-with-vercel)
 
--Tailwind
-  https://v2.tailwindcss.com/docs
-
-# Backend
--Firebase
-  https://firebase.google.com/docs/web/setup
-
-# Hosting
--Vercel
-  https://vercel.com/guides/deploying-react-with-vercel
-```
