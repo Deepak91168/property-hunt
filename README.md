@@ -43,7 +43,7 @@ for users to upload property details, images, and manage their listings. Users c
 ```
 
 ## Screenshot
-![Home Page](./src/assets/images/property-hunt.png)
+[![Home Page](./src/assets/images/property-hunt.png)](https://drive.google.com/file/d/1nxodDRkmBlikwlMBImv7VRdg4SUyrqK-/view?usp=drive_link)
 
 
 ## Contributing
