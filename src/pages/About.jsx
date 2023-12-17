@@ -9,15 +9,15 @@ export const About = () => {
 
   return (
     <div
-      className={`h-full mt-14 mb-24 max-w-6xl mx-auto flex flex-col justify-center items-center`}
+      className={`max-w-6xl mx-auto flex flex-col mt-16 sm:mt-32 items-center mb-[64px]`}
     >
       <div className={`text-4xl font-bold ${textColor("text-red-500")}  mb-4`}>
         About
       </div>
       <div
-        className={`border-2 mx-4 ${
-          theme ? "border-white shadow-white text-white" : "border-red-500"
-        } p-4 shadow-lg rounded-lg`}
+        className={`border-2 mx-4 text-sm ${
+          theme ? "border-white shadow-red-500 text-white" : "border-red-500"
+        } p-4 shadow-sm rounded-lg`}
       >
         Welcome to Property Hunt, your ultimate destination for all your real
         estate needs. Whether you are looking to buy, sell, or invest in

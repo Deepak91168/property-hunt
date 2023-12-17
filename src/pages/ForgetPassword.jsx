@@ -6,21 +6,21 @@ import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 export const ForgetPassword = () => {
   const [email, setEmail] = useState();
   const OnSiginChange = (event) => {
-    setEmail(event.target.value)
+    setEmail(event.target.value);
   };
-  
-  async function onsubmit(e){
+
+  async function onsubmit(e) {
     e.preventDefault();
     try {
       const auth = getAuth();
-      await sendPasswordResetEmail(auth,email);
-      toast.success("Email Sent!")
+      await sendPasswordResetEmail(auth, email);
+      toast.success("Email Sent!");
     } catch (error) {
-      toast.error("Could not send reset email!")
+      toast.error("Could not send reset email!");
     }
   }
   return (
-    <section className="min-h-screen flex flex-col justify-center sm:px-6 lg:px-8 ">
+    <section className="mt-32 flex flex-col justify-center sm:px-6 lg:px-8 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-md ">
         <h2 className="text-center text-3xl font-bold text-[#c40c1c] mb-6">
           Forget Password
@@ -61,7 +61,7 @@ export const ForgetPassword = () => {
               </div>
               <div className="text-sm">
                 <Link
-                  to='/singup'
+                  to="/singup"
                   className="font-medium text-red-500 hover:text-red-700"
                 >
                   Create new account

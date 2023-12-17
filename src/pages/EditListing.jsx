@@ -314,7 +314,7 @@ export const EditListing = () => {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-around mt-2">
+            {/* <div className="flex items-center justify-around mt-2">
               <input
                 id="latitude"
                 name="latitude"
@@ -338,7 +338,7 @@ export const EditListing = () => {
                 onChange={onchange}
                 className="no-number-arrows appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
               />
-            </div>
+            </div> */}
             <div>
               <label
                 htmlFor="description"

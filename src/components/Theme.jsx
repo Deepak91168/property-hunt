@@ -10,7 +10,7 @@ const Theme = ({ onTheme, onClickTheme }) => {
   return (
     <button
       type="button"
-      className={` ${toggleClass} fixed right-8  bottom-5 text-2xl p-4 rounded-xl transition-[transform,shadow]  duration-200 shadow-lg shadow-[rgba(0, 0, 0, 0.15) 0px 2px 8px] active:shadow-[rgba(0, 0, 0, 0.15) 0px 0px 0px] active:translate-x-[0px] active:translate-y-[2px]`}
+      className={` ${toggleClass} fixed right-4 flex justify-center items-center bottom-14 text-sm sm:text-md p-4 rounded-full transition-[transform,shadow]  duration-200 shadow-lg shadow-[rgba(0, 0, 0, 0.15) 0px 2px 8px] active:shadow-[rgba(0, 0, 0, 0.15) 0px 0px 0px] active:translate-x-[0px] active:translate-y-[2px]`}
       onClick={toggleHandler}
     >
       {onTheme ? (

@@ -7,7 +7,11 @@ import { db } from "../firebase";
 import { query, where, collection, getDocs, orderBy } from "firebase/firestore";
 import { ListItem } from "../components/ListItem";
 import { Link } from "react-router-dom";
+import ThemeContext from "../context/ThemeContext";
+import { useContext } from "react";
+
 export const Profile = () => {
+  const theme = useContext(ThemeContext);
   const auth = getAuth();
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
@@ -106,29 +110,66 @@ export const Profile = () => {
   function onEdit(listID) {
     navigate(`/edit-listing/${listID}`);
   }
+
+  const color = (value1, value2) => {
+    return theme ? value1 : value2;
+  };
+
   return (
-    <section className="px-4 py-6 max-w-6xl mx-auto ">
-      <div className="p-8 bg-white shadow-xl mt-24 border-[0.5px] border-red-500/30">
+    <section className="px-4 py-6 max-w-6xl mx-auto h-screen">
+      <div
+        className={`p-6 shadow-xl rounded-lg mt-24 border-[1px] border-red-500/30 ${color(
+          "bg-black",
+          "bg-white"
+        )} `}
+      >
         <div className="grid grid-cols-1 md:grid-cols-3">
           <div className="grid grid-cols-1 text-center order-last md:order-first"></div>
           <div className="relative">
-            <div className="w-48 h-48 bg-[#c40c1c] mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
+            <div
+              className={`w-40 h-40 sm:w-48 sm:h-48 ${color(
+                "bg-slate-600",
+                "bg-[#c40c1c]"
+              )}  mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500`}
+            >
               {svg}
             </div>
           </div>
         </div>
         <form>
-          <div className="mb-6 mt-32">
-            <div className=" max-w-xl m-auto text-center border-b-[1px] border-red-500/30">
+          <div className="mb-6 mt-20 sm:mt-32">
+            <div className={`${edit && "hidden"}`}>
+              <div
+                className={`${color(
+                  "text-slate-500",
+                  "text-red-500"
+                )} text-center font-bold text-xl`}
+              >
+                {name}
+              </div>
+              <div
+                className={`${color(
+                  "text-slate-500",
+                  "text-red-500"
+                )} text-center text-sm`}
+              >
+                {email}
+              </div>
+            </div>
+            <div
+              className={`${
+                !edit && "hidden"
+              } max-w-xl m-auto text-center border-b-[1px] border-red-500/30`}
+            >
               <input
                 type="text"
                 id="name"
                 disabled={!edit}
                 value={name}
                 onChange={onInputChange}
-                className={`text-3xl p-2 max-w-full ${
+                className={`text-3xl p-2 max-w-full rounded-md ${
                   edit &&
-                  "bg-red-100 focus:bg-red-200 focus:border-red-400 rounded-md"
+                  "border-2 bg-gray-300 border-red-400 focus:bg-red-200 focus:border-red-400 rounded-md"
                 } text-center font-medium text-gray-700 focus:border-[#c40c1c] focus:outline-none focus:ring-2 focus:ring-[#c40c1c]`}
               />
               <input
@@ -137,9 +178,9 @@ export const Profile = () => {
                 disabled={!edit}
                 value={email}
                 onChange={onInputChange}
-                className={`font-light p-2 ${
+                className={`font-light rounded-md p-2 ${
                   edit &&
-                  "bg-red-200 focus:bg-red-200 focus:border-red-400 rounded-md"
+                  "border-2 bg-gray-300 border-red-400 focus:bg-red-200 focus:border-red-400 rounded-md"
                 } text-center text-gray-600 mt-3 mb-6 focus:border-[#c40c1c] focus:outline-none focus:ring-2 focus:ring-[#c40c1c]`}
               />
             </div>
@@ -149,7 +190,10 @@ export const Profile = () => {
             <button
               type="text"
               onClick={redirecttolisting}
-              className=" w-full flex justify-center items-center py-2 px-4 border border-red-500 rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              className={` transition ease-in-out duration-300 w-full flex justify-center items-center py-2 px-4 rounded-md shadow-sm text-sm  ${color(
+                "bg-gray-400 text-black",
+                "bg-red-500 text-white"
+              )}  hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500`}
             >
               Sell or Rent Property
             </button>
@@ -158,21 +202,27 @@ export const Profile = () => {
             <button
               type="text"
               onClick={onEditprofile}
-              className=" w-full flex justify-center items-center py-2 px-4 border border-red-500 rounded-md shadow-sm text-sm font-medium text-red-500 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              className={`w-full flex justify-center items-center py-2 px-4 border border-red-500 rounded-md shadow-sm text-sm font-medium  ${color(
+                "bg-gray-200 text-black",
+                "bg-white text-red-500"
+              )} hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500`}
             >
               {edit ? "Apply Changes" : "Edit Profile"}
             </button>
             <button
               type="submit"
               onClick={onSignout}
-              className=" w-full flex justify-center items-center py-2 px-4 border border-red-500 rounded-md shadow-sm text-sm font-medium text-red-500 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              className={`w-full flex justify-center items-center py-2 px-4 border border-red-500 rounded-md shadow-sm text-sm font-medium  ${color(
+                "bg-gray-200 text-black",
+                "bg-white text-red-500"
+              )} hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500`}
             >
               Sign Out
             </button>
           </div>
         </form>
         <div className="mt-12 flex flex-col justify-center">
-          <p className="text-gray-600 text-center font-light lg:px-16">
+          <p className="text-gray-500 text-center lg:px-16">
             An artist of considerable range, Ryan — the name taken by
             Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and
             records all of his own music, giving it a warm, intimate feel with a
@@ -180,7 +230,7 @@ export const Profile = () => {
           </p>
 
           <button
-            className={`text-indigo-500 py-2 px-4 font-md mt-4`}
+            className={`text-indigo-500 py-2 px-4 font-md mt-4 text-sm`}
             onClick={() => {
               setShowListings((prev) => !prev);
             }}
@@ -193,7 +243,7 @@ export const Profile = () => {
           className={showlistings ? "px-4 py-6 max-w-6xl mx-auto" : "hidden"}
         >
           {!loading && listings.length === 0 && (
-            <p className="mx-auto text-sm text-gray-400">
+            <p className="mx-auto text-sm font-semibold text-center text-gray-400">
               No Property listed Yet!
             </p>
           )}

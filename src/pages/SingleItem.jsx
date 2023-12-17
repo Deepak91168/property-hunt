@@ -58,74 +58,87 @@ export const SingleItem = () => {
     return <Loader />;
   }
 
+  const color = (value1, value2) => {
+    return theme ? value1 : value2;
+  };
   return (
-    <section>
-      <ImageCarousel images={list.imgUrls} />
-      <div
-        class={`shadow-xl max-w-6xl rounded-lg mx-auto mt-4 lg:mx-auto border-[2px] ${
-          theme ? "border-white" : "border-red-500"
-        } mb-12`}
-      >
-        <div class="flex flex-col-reverse md:flex-row ">
-          <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 rounded-lg p-4 pb-0 mb-0">
-            <div>
-              <div className={`${theme ? "text-white" : ""}`}>
-                <span className="font-semibold text-2xl mb-2 flex items-baseline">
-                  {list.name} - ₹
-                  {list.regularPrice
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-                  {list.type === "rent" && (
-                    <p className="text-sm text-gray-400">/month</p>
-                  )}
-                </span>
-              </div>
-              <div className="mt-2 text-md text-red-500 font-semibold flex items-baseline">
-                <FaMapMarkerAlt className="text-[12px] p-0 mr-1" />
-                {list.address}
-              </div>
-              <div className="flex space-x-2 mt-2">
-                <Label text={list.type === "sell" ? "Sale" : "Rent"} />
-                {list.furnished && <Label text="Furnished" />}
-                {list.parking && <Label text="Parking" />}
-              </div>
-
-              <div className="py-1 text-sm text-gray-800 w-full break-words">
-                <div className="">{list.description}</div>
-              </div>
+    <>
+      {/* <Loader /> */}
+      <section className="pb-[64px]">
+        <ImageCarousel images={list.imgUrls} />
+        <div
+          class={`shadow-xl  max-w-6xl rounded-md mx-4 mt-4 lg:mx-auto border-2 ${
+            theme ? "border-gray-600" : "border-red-500"
+          } mb-12`}
+        >
+          <div class="flex flex-col-reverse md:flex-row ">
+            <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 rounded-lg p-4 pb-4 sm:pb-0 mb-0 ">
               <div>
-                {/* Details */}
-                <ul className={`flex mt-2 ${theme ? "text-white" : ""}`}>
-                  <div className=" flex justify-center">
-                    <FaBed className="text-2xl " /> <p className="px-2">4</p>
-                  </div>
-                  <div className=" flex justify-center">
-                    <FaBath className="text-xl" /> <p className="px-2">4</p>
-                  </div>
-                </ul>
-              </div>
-              {list && list.userRef !== auth.currentUser?.uid && (
-                <div className="py-2">
-                  <form className="flex flex-col">
-                    <textarea
-                      className="mb-4 no-number-arrows mr-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                      type="text"
-                      placeholder="Write a message to owner"
-                    />
-                    <button type="submit" className={fullbtn}>
-                      Send Email
-                    </button>
-                  </form>
+                <div className={`${theme ? "text-white" : ""}`}>
+                  <span className="font-semibold  text-md sm:text-xl md:text-2xl mb-2 flex items-baseline">
+                    {list.name} - ₹
+                    {list.regularPrice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                    {list.type === "rent" && (
+                      <p className="text-sm text-gray-400">/month</p>
+                    )}
+                  </span>
                 </div>
-              )}
+                <div className="mt-2 text-sm sm:text-md text-red-500 font-semibold flex items-baseline">
+                  <FaMapMarkerAlt className="text-[12px] p-0 mr-1" />
+                  {list.address}
+                </div>
+                <div className="flex space-x-2 mt-2">
+                  <Label text={list.type === "sell" ? "Sale" : "Rent"} />
+                  {list.furnished && <Label text="Furnished" />}
+                  {list.parking && <Label text="Parking" />}
+                </div>
+
+                <div
+                  className={`py-1 text-[0.8rem] sm:text-sm  w-full break-words ${color(
+                    "text-slate-200",
+                    "text-gray-800"
+                  )}`}
+                >
+                  <div className="">{list.description}</div>
+                </div>
+                <div>
+                  {/* Details */}
+                  <ul className={`flex mt-2 ${theme ? "text-white" : ""}`}>
+                    <div className=" flex justify-center">
+                      <FaBed className="text-2xl " />{" "}
+                      <p className="px-2">{list.bed}</p>
+                    </div>
+                    <div className=" flex justify-center">
+                      <FaBath className="text-xl" />{" "}
+                      <p className="px-2">{list.bath}</p>
+                    </div>
+                  </ul>
+                </div>
+                {list && list.userRef !== auth.currentUser?.uid && (
+                  <div className="py-2">
+                    <form className="flex flex-col">
+                      <textarea
+                        className="mb-4 no-number-arrows mr-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                        type="text"
+                        placeholder="Write a message to owner"
+                      />
+                      <button type="submit" className={fullbtn}>
+                        Send Email
+                      </button>
+                    </form>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 p-0 h-72 sm:h-[400px]">
+              <MapComponent position={position} />
             </div>
           </div>
-
-          <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 p-0 h-72 sm:h-[400px]">
-            <MapComponent position={position} />
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };

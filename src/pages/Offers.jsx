@@ -24,7 +24,7 @@ export const Offers = () => {
         const listRef = collection(db, "listings");
         const q = query(
           listRef,
-          where("offer", "==", true),
+
           orderBy("timestamp", "desc"),
           limit(8)
         );
@@ -42,7 +42,6 @@ export const Offers = () => {
         setList(list);
         setLoading(false);
       } catch (error) {
-        console.log(error);
         toast.error("Could not fetch properties at this moment :(");
       }
     }
@@ -53,7 +52,6 @@ export const Offers = () => {
       const listRef = collection(db, "listings");
       const q = query(
         listRef,
-        where("offer", "==", true),
         orderBy("timestamp", "desc"),
         startAfter(prevfetch),
         limit(4)
@@ -70,20 +68,18 @@ export const Offers = () => {
         });
       });
       setList((prev) => [...prev, ...list]);
-      console.log(list);
       setLoading(false);
     } catch (error) {
-      console.log(error);
       toast.error("Could not fetch properties at this moment :(");
     }
   }
   return (
     <>
-      <div className="mx-auto flex justify-center">
+      <div className=" flex justify-center mt-32 mb-[64px] z-40">
         {loading && <Loader />}
         {list && list.length > 0 && (
-          <div className="max-w-6xl p-2 mt-6 flex w-full ">
-            <div className="pb-2 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="max-w-6xl flex flex-wrap w-full  border-black">
+            <div className="pb-2 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {list.map((list) => (
                 <ListItem key={list.id} id={list.id} listing={list.data} />
               ))}

@@ -32,14 +32,14 @@ export const Home = () => {
     >
       <div className=" h-full flex flex-col items-center justify-center mb-4 z-10 ">
         <div
-          className={`font-extrabold text-2xl sm:text-3xl ${textColor(
+          className={`font-extrabold text-xl sm:text-3xl text-center ${textColor(
             "text-[#c40c1c]"
           )} pb-4`}
         >
           Welcome to Property Hunt
         </div>
         <div
-          className={`text-center text-4xl sm:text-6xl font-extrabold ${textColor(
+          className={`text-center text-2xl sm:text-6xl font-extrabold ${textColor(
             "text-red-500"
           )} `}
         >

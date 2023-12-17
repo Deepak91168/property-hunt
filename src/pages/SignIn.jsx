@@ -20,13 +20,10 @@ export const SignIn = () => {
       [event.target.id]: event.target.value,
     }));
   };
-  useEffect(() => {
-    console.log(token);
-  }, [token]);
+  useEffect(() => {}, [token]);
 
   async function onsubmit(event) {
     event.preventDefault();
-    console.log("Try ke bhar");
     try {
       const auth = getAuth();
       const userCredentials = await signInWithEmailAndPassword(
@@ -45,7 +42,7 @@ export const SignIn = () => {
   }
 
   return (
-    <section className="min-h-screen flex flex-col justify-center sm:px-6 lg:px-8 ">
+    <section className="mt-32 flex flex-col justify-center sm:px-6 lg:px-8 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-md ">
         <h2 className="text-center text-3xl font-bold text-[#c40c1c] mb-6">
           Sign In

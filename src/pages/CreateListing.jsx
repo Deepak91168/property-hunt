@@ -70,7 +70,6 @@ export const CreateListing = () => {
       }));
     }
     if (!e.target.files) {
-      console.log(e.target.value);
       setFormData((prev) => ({
         ...prev,
         [e.target.id]: bool ?? e.target.value,
@@ -110,18 +109,19 @@ export const CreateListing = () => {
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100
             );
             // <ProgressBar progress={progress}/>
-            console.log("Upload is " + progress + "% done");
+            // console.log("Upload is " + progress + "% done");
             switch (snapshot.state) {
               case "paused":
-                console.log("Upload is paused");
+                // console.log("Upload is paused");
                 break;
               case "running":
-                console.log("Upload is running");
+                // console.log("Upload is running");
                 break;
             }
           },
           (error) => {
-            console.log(error);
+            // console.log(error);
+            toast.error("Unable to upload image!");
             reject(error);
           },
           () => {
@@ -150,7 +150,6 @@ export const CreateListing = () => {
     !formdata.offer && delete formCopy.priceDiscounted;
     delete formCopy.latitude;
     delete formCopy.longitude;
-    console.log(formCopy);
     const docRef = await addDoc(collection(db, "listings"), formCopy);
     navigate(`/category/${formCopy.type}/${docRef.id}`);
     toast.success("Property Listed successfully!");
@@ -291,7 +290,7 @@ export const CreateListing = () => {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-around mt-2">
+            {/* <div className="flex items-center justify-around mt-2">
               <input
                 required
                 id="latitude"
@@ -317,7 +316,7 @@ export const CreateListing = () => {
                 onChange={onchange}
                 className="no-number-arrows appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
               />
-            </div>
+            </div> */}
             <div>
               <label
                 htmlFor="description"

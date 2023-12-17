@@ -35,7 +35,7 @@ function App() {
             <Route path="/profile" element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />
             </Route>
-            <Route path="/offers" element={<Offers />} />
+            <Route path="/properties" element={<Offers />} />
             <Route path="createlisting" element={<PrivateRoute />}>
               <Route path="/createlisting" element={<CreateListing />} />
             </Route>
@@ -54,7 +54,7 @@ function App() {
 
         <Footer />
         <ToastContainer
-          position="bottom-center"
+          position="top-center"
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}
