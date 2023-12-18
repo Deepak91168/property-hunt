@@ -43,7 +43,8 @@ for users to upload property details, images, and manage their listings. Users c
 ```
 
 ## Screenshot
-![Home Page](screenshots/home.PNG)
+![Imgur](https://i.imgur.com/T6L6nzC.png)
+
 ## Contributing
 
 Contributions are always welcome :)
