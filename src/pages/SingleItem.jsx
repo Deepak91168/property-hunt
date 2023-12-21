@@ -8,13 +8,11 @@ import { FaBed, FaBath, FaMapMarkerAlt } from "react-icons/fa";
 import { MapComponent } from "../components/MapComponent";
 import { Label } from "../components/Label";
 import { getAuth } from "firebase/auth";
-import { toast } from "react-toastify";
 import ThemeContext from "../context/ThemeContext";
 // TODO: Use exact location for latitude and longitude
 export const SingleItem = () => {
   const theme = useContext(ThemeContext);
   const auth = getAuth();
-  // console.log("Current user" + auth.currentUser.uid);
   const params = useParams();
   const [list, setList] = useState(null);
   const [loader, setLoader] = useState(true);
@@ -38,22 +36,22 @@ export const SingleItem = () => {
     }
     fetchListing();
   }, [params.listingID]);
-  const [owneremail, setOwnerEmail] = useState("ds9210048@gmail.com");
-  // useEffect(()=> {
-  //   const getOwner = async () => {
-  //     const docRef = doc(db,"users",list.userRef);
-  //     const docSnap = await getDoc(docRef);
-  //     if(docSnap.exists()){
-  //       console.log(docSnap.data());
-  //       setOwnerEmail(docSnap.data().email)
-  //     }
-  //     else{
-  //       toast.error("Not able to get owener's email")
-  //     }
-  //   }
-  //   getOwner()
-  // },[list.userRef])
-  // console.log(owneremail)
+  // const [owneremail, setOwnerEmail] = useState("ds9210048@gmail.com");
+  // // useEffect(()=> {
+  // //   const getOwner = async () => {
+  // //     const docRef = doc(db,"users",list.userRef);
+  // //     const docSnap = await getDoc(docRef);
+  // //     if(docSnap.exists()){
+  // //       console.log(docSnap.data());
+  // //       setOwnerEmail(docSnap.data().email)
+  // //     }
+  // //     else{
+  // //       toast.error("Not able to get owener's email")
+  // //     }
+  // //   }
+  // //   getOwner()
+  // // },[list.userRef])
+  // // console.log(owneremail)
   if (loader) {
     return <Loader />;
   }

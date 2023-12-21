@@ -4,7 +4,6 @@ import {
   collection,
   orderBy,
   query,
-  where,
   limit,
   startAfter,
 } from "firebase/firestore";

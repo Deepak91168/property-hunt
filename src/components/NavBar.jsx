@@ -3,15 +3,12 @@ import logo from "../assets/images/logo.png";
 import { useContext, useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ThemeContext from "../context/ThemeContext";
-import { HiMenu } from "react-icons/hi";
 export const NavBar = () => {
   //true = Sign in
   const [pageState, setPageState] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const theme = useContext(ThemeContext);
-  const [mobileView, setMobileView] = useState(false);
-
   const pathUrl = location.pathname;
   const auth = getAuth();
   const svg = (

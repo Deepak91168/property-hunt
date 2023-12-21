@@ -11,13 +11,10 @@ export const ListItem = ({ listing, id, onDelete, onEdit }) => {
   const navigate = useNavigate();
   const theme = useContext(ThemeContext);
 
-  const btnTheme = theme
-    ? "bg-white text-black hover:text-white hover:border-white focus:ring-gray-500   "
-    : "bg-red-600  hover:text-red-700 hover:border-red-500  ";
+  // const btnTheme = theme
+  //   ? "bg-white text-black hover:text-white hover:border-white focus:ring-gray-500   "
+  //   : "bg-red-600  hover:text-red-700 hover:border-red-500  ";
 
-  const fullbtn =
-    btnTheme +
-    " w-full flex justify-center py-2 px-4 border-2 border-transparent rounded-md shadow-sm text-md font-medium hover:bg-transparent   hover:border-2  focus:outline-none transition-all focus:ring-2 focus:ring-offset-2 ";
   if (!listing) {
     return;
   }

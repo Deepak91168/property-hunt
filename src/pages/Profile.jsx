@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { db } from "../firebase";
 import { query, where, collection, getDocs, orderBy } from "firebase/firestore";
 import { ListItem } from "../components/ListItem";
-import { Link } from "react-router-dom";
 import ThemeContext from "../context/ThemeContext";
 import { useContext } from "react";
 
