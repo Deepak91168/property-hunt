@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /about/
+Allow: /singin/
+Allow: /singup
+Allow: /profile/
+Allow: /properties/
+Disallow: /admin/
+Disallow: /private/
