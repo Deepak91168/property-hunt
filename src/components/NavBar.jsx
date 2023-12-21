@@ -45,7 +45,7 @@ export const NavBar = () => {
           className="flex justify-center items-center cursor-pointer"
           onClick={() => navigate("/")}
         >
-          <img src={logo} className="h-6 sm:h-8 cursor-pointer" alt="logo" />
+          <img src={logo} className="h-6 w-6 sm:h-8 sm:w-8 cursor-pointer" alt="logo" />
           <h3
             className={`ml-4 font-bold text-sm sm:text-lg ${
               theme ? "text-white" : navIconTextColor
