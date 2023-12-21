@@ -1,9 +1,14 @@
 import { useState } from "react";
 import "../styles/icon.css";
-const Theme = ({ onTheme, onClickTheme }) => {
+import {toast} from 'react-toastify';
+const Theme = ({ onTheme, onClickTheme, }) => {
   const toggleHandler = () => {
+    if(onTheme === false){
+      toast.warn("We are still working towards adding the dark mode to every page");
+    }
     onClickTheme((prevTheme) => !prevTheme);
   };
+
 
   const toggleClass = onTheme ? "bg-black" : "bg-red-500";
 

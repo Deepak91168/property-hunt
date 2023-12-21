@@ -66,7 +66,7 @@ function App() {
           theme="light"
         />
       </ThemeContext.Provider>
-      <Theme onTheme={themeToggle} onClickTheme={setThemeToggle} />
+      <Theme  onTheme={themeToggle} onClickTheme={setThemeToggle} />
     </div>
   );
 }
