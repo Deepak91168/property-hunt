@@ -54,7 +54,7 @@ export const Home = () => {
             type="button"
             className={fullbtn}
             onClick={() => {
-              navigate("/offers");
+              navigate("/properties");
             }}
           >
             Explore
